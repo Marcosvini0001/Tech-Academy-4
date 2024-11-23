@@ -12,7 +12,7 @@ public class ProdutoController {
 
     @GetMapping
     public ResponseEntity<List<ProdutoController>> findAll(){
-        List<> movies = this.repository.findAll();
+        List<produto> movies = this.repository.findAll();
         return ResponseEntity.ok(movies);
     }
 }
