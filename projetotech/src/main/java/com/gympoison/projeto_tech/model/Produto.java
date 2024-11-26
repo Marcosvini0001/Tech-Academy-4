@@ -1,33 +1,55 @@
-package com.gympoison.projeto_tech.Model;
+package com.exemplo.produto.model;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
-@Table
 public class Produto {
-
-    @Column(name = "name")
-    private String nome;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column
-    private BigDecimal valor;
+    private String nome;
+
+    @Column
+    private Double preco;
+
+    @Column
+    private Integer quantidade;
 
     @Column
     private String descricao;
 
+    @Column
+    private String categoria;
 
-    public String getNome() {
-        return nome;
+    @Column
+    private String status;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getDescricao() {
@@ -38,19 +60,42 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public BigDecimal getValor() {
-        return valor;
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public Integer getId() {
-        return id;
+    public Double getPreco() {
+        return preco;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Produto produto = (Produto) o;
+        return Objects.equals(id, produto.id) && Objects.equals(nome, produto.nome) && Objects.equals(preco, produto.preco) && Objects.equals(quantidade, produto.quantidade) && Objects.equals(descricao, produto.descricao) && Objects.equals(categoria, produto.categoria) && Objects.equals(status, produto.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, preco, quantidade, descricao, categoria, status);
     }
 }
+
+
