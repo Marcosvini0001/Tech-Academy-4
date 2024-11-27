@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
+@Table
 @Entity
 public class Produto {
     @Id
@@ -29,14 +30,17 @@ public class Produto {
     private String status;
 
     public Long getId() {
+
         return id;
     }
 
     public void setId(Long id) {
+
         this.id = id;
     }
 
     public String getStatus() {
+
         return status;
     }
 
@@ -45,26 +49,32 @@ public class Produto {
     }
 
     public String getCategoria() {
+
         return categoria;
     }
 
     public void setCategoria(String categoria) {
+
         this.categoria = categoria;
     }
 
     public String getDescricao() {
+
         return descricao;
     }
 
     public void setDescricao(String descricao) {
+
         this.descricao = descricao;
     }
 
     public Integer getQuantidade() {
+
         return quantidade;
     }
 
     public void setQuantidade(Integer quantidade) {
+
         this.quantidade = quantidade;
     }
 
@@ -73,14 +83,17 @@ public class Produto {
     }
 
     public void setPreco(Double preco) {
+
         this.preco = preco;
     }
 
     public String getNome() {
+
         return nome;
     }
 
     public void setNome(String nome) {
+
         this.nome = nome;
     }
 

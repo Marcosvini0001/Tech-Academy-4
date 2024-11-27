@@ -21,7 +21,7 @@ public class ProdutoController {
     private UsuarioRepository actorRepository;
 
     @GetMapping
-    public ResponseEntity<List<com.exemplo.produto.model.Produto>> findAll() {
+    public ResponseEntity<List<Produto>> findAll() {
         List<com.exemplo.produto.model.Produto> produtos = this.repository.findAll();
         return ResponseEntity.ok(produtos);
     }
