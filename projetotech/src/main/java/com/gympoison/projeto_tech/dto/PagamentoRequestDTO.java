@@ -1,4 +1,4 @@
 package com.gympoison.projeto_tech.dto;
 
-public class PagamentoRequestDTO {
+public record PagamentoRequestDTO {
 }
