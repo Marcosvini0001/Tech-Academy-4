@@ -1,4 +1,4 @@
-package com.exemplo.produto.model;
+package com.gympoison.projeto_tech.model;
 
 import jakarta.persistence.*;
 

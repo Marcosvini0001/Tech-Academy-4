@@ -1,4 +1,6 @@
 package com.gympoison.projeto_tech.dto;
 
-public record CategoriaRequestDTO(String nome) {
+import jakarta.validation.constraints.NotBlank;
+public record CategoriaRequestDTO(@NotBlank Integer id
+                                , @NotBlank String nome) {
 }
