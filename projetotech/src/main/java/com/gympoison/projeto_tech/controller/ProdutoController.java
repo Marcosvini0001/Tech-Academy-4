@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import com.gympoison.projeto_tech.model.*;
+import com.gympoison.projeto_tech.model.Produto;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -42,7 +42,7 @@ public class ProdutoController {
         produto.setPreco(dto.preco());
         produto.setDescricao(dto.descricao());
         produto.setCategoria(dto.categoria());
-        preco.setStatus(dto.status());
+        produto.setStatus(dto.status());
 
         this.repository.save(produto);
         return ResponseEntity.status(HttpStatus.CREATED).body(produto);
@@ -51,7 +51,7 @@ public class ProdutoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        com.exemplo.produto.model.Produto produto = this.repository.findById(id)
+        Produto produto = this.repository.findById(id)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não foi encontrado"));
 

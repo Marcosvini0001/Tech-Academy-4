@@ -1,18 +1,82 @@
 package com.gympoison.projeto_tech.controller;
 
+import com.gympoison.projeto_tech.dto.UsuarioRequestDTO;
+import com.gympoison.projeto_tech.model.Usuario;
 import com.gympoison.projeto_tech.repository.UsuarioRepository;
+import com.gympoison.projeto_tech.response.UsuarioResponseDTO;
+import jakarta.persistence.Column;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+
+@RestController
+@RequestMapping("/api/usuarios")
 public class UsuarioController {
 
+        @Autowired
         private UsuarioRepository repository;
 
-        @GetMapping
-        public ResponseEntity<List<UsuarioRepository>> findAll(){
-            List<UsuarioRepository> usuario = this.repository.findAll();
-            return ResponseEntity.ok(usuario);
-        }
+    @GetMapping
+    public ResponseEntity<List<UsuarioResponseDTO>> findAll() {
+        List<UsuarioRepository> usuarios = repository.findAll();
+        List<UsuarioResponseDTO> responseDTOs = usuarios.stream()
+                .map(UsuarioResponseDTO::new)
+                .toList();
+        return ResponseEntity.ok(responseDTOs);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioResponseDTO> findById(@PathVariable Integer id) {
+        Usuario usuario = repository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
+        return ResponseEntity.ok(new UsuarioResponseDTO(usuario));}
+
+
+    @PostMapping
+    public ResponseEntity<Usuario> save(@Valid @RequestBody UsuarioRequestDTO dto){
+
+        Usuario usuario = new Usuario();
+        usuario.setId(dto.id());
+        usuario.setNome(dto.nome());
+        usuario.setEmail(dto.email());
+        usuario.setCep(dto.cep());
+        usuario.setEndereco(dto.endereco());
+
+        this.repository.save(usuario);
+        return ResponseEntity.ok(usuario);
+
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Integer id) {
+        Usuario usuario = repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
+        repository.delete(usuario);
+        return ResponseEntity.ok("Usuário removido com sucesso");
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Usuario> update(@PathVariable Integer id,@Valid @RequestBody UsuarioRequestDTO dto){
+        Usuario usuario = repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
+
+        usuario.setId(dto.id());
+        usuario.setNome(dto.nome());
+        usuario.setEmail(dto.email());
+        usuario.setCep(dto.cep());
+        usuario.setEndereco(dto.endereco());
+
+        repository.save(usuario);
+        return ResponseEntity.ok(usuario);
+    }
+
+}
+
 }

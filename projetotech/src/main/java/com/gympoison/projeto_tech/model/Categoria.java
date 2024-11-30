@@ -1,4 +1,4 @@
-package com.gympoison.projeto_tech.Model;
+package com.gympoison.projeto_tech.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
