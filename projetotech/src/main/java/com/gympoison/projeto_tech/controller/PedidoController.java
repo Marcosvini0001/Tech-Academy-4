@@ -1,6 +1,7 @@
 package com.gympoison.projeto_tech.controller;
 
 
+import com.gympoison.projeto_tech.dto.ItemRequestDTO;
 import com.gympoison.projeto_tech.dto.PedidoRequestDTO;
 import com.gympoison.projeto_tech.model.Pedido;
 import com.gympoison.projeto_tech.model.Usuario;
@@ -33,7 +34,7 @@ public class PedidoController {
 
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id_pedido}")
     public ResponseEntity<Pedido> findById(@PathVariable Integer id_cliente) {
         Pedido pedido = repository.findById(id_cliente)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
@@ -45,7 +46,7 @@ public class PedidoController {
         Usuario usuario = repositoryUsuario.findById(dto.id_cliente())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
         Pedido pedido = new Pedido();
-        pedido.setid_cliente(usuario);
+        pedido.setid_cliente(dto.id_cliente);
         pedido.setdata_pedido(dto.data_pedido());
         pedido.setstatus_pedido(dto.status_pedido());
         pedido.settotal_pedido(dto.total_pedido());
@@ -72,7 +73,7 @@ public class PedidoController {
         Usuario usuario = repositoryUsuario.findById(dto.id_cliente())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
 
-        pedido.setid_cliente(usuario);
+        pedido.setid_cliente(dto.id_cliente);
         pedido.setdata_pedido(dto.data_pedido());
         pedido.setstatus_pedido(dto.status_pedido());
         pedido.settotal_pedido(dto.total_pedido());

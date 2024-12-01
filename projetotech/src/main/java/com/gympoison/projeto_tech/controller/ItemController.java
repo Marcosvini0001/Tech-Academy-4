@@ -25,7 +25,7 @@ public class ItemController {
         return ResponseEntity.ok(item);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id_item}")
     public ResponseEntity<Item> findById(@PathVariable Integer id_item) {
        Item item = this.repository.findById(id_item)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não foi encontrado"));
@@ -48,8 +48,8 @@ public class ItemController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        Item item = this.repository.findById(id)
+    public ResponseEntity<Void> delete(@PathVariable Integer id_item) {
+        Item item = this.repository.findById(id_item)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não foi encontrado"));
 
@@ -58,9 +58,9 @@ public class ItemController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Item> update(@PathVariable Integer id, @Valid @RequestBody ItemRequestDTO dto) {
+    public ResponseEntity<Item> update(@PathVariable Integer id_item, @Valid @RequestBody ItemRequestDTO dto) {
 
-        Item item = this.repository.findById(id)
+        Item item = this.repository.findById(id_item)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não foi encontrado"));
 
         item.setNome_item(dto.nome_item());
