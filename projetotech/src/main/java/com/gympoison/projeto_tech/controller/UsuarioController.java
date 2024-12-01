@@ -35,7 +35,7 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioResponseDTO> findById(@PathVariable Integer id) {
-        Usuario usuario = repository.findById(id).orElseThrow(() -> // esta dando erro nessa linha em (id)
+        Usuario usuario = repository.findById(Id_usuario).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
         return ResponseEntity.ok(new UsuarioResponseDTO(usuario));}
 
@@ -50,23 +50,23 @@ public class UsuarioController {
         usuario.setCep(dto.cep());
         usuario.setEndereco(dto.endereco());
 
-        this.repository.save(usuario); // esta dando erro nessa linha
+        this.repository.save(usuario);
         return ResponseEntity.ok(usuario);
 
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        Usuario usuario = repository.findById(id) // esta dando erro nessa linha em (id)
+        Usuario usuario = repository.findById(Id_usuario)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
-        repository.delete(usuario); // esta dando erro nessa linha
+        repository.delete(usuario);
         return ResponseEntity.ok("Usuário removido com sucesso");
     }
 
 
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> update(@PathVariable Integer id,@Valid @RequestBody UsuarioRequestDTO dto){
-        Usuario usuario = repository.findById(id) // esta dando erro nessa linha em (id)
+        Usuario usuario = repository.findById(Id_usuario)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
 
         usuario.setId(dto.id());
@@ -75,7 +75,7 @@ public class UsuarioController {
         usuario.setCep(dto.cep());
         usuario.setEndereco(dto.endereco());
 
-        repository.save(usuario); // esta dando erro nessa linha
+        repository.save(usuario);
         return ResponseEntity.ok(usuario);
     }
 

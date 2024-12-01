@@ -10,7 +10,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer Id_usuario;
 
     @Column(name = "name")
     private String nome;
@@ -28,11 +28,11 @@ public class Usuario {
     private Integer Senha;
 
     public Integer getId() {
-        return Id;
+        return Id_usuario;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        Id_usuario = id;
     }
 
     public Integer getSenha() {
@@ -80,11 +80,11 @@ public class Usuario {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return Objects.equals(Id, usuario.Id) && Objects.equals(nome, usuario.nome) && Objects.equals(cep, usuario.cep) && Objects.equals(email, usuario.email) && Objects.equals(endereco, usuario.endereco) && Objects.equals(Senha, usuario.Senha);
+        return Objects.equals(Id_usuario, usuario.Id_usuario) && Objects.equals(nome, usuario.nome) && Objects.equals(cep, usuario.cep) && Objects.equals(email, usuario.email) && Objects.equals(endereco, usuario.endereco) && Objects.equals(Senha, usuario.Senha);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, nome, cep, email, endereco, Senha);
+        return Objects.hash(Id_usuario, nome, cep, email, endereco, Senha);
     }
 }
