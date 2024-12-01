@@ -2,6 +2,7 @@ package com.gympoison.projeto_tech.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Table
@@ -9,16 +10,16 @@ import java.util.Objects;
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_item;
 
     @Column
-    private String nome;
+    private String nome_item;
 
     @Column
-    private Double preco;
+    private BigDecimal preco_atual;
 
     @Column
-    private Integer quantidade;
+    private Integer estoque;
 
     @Column
     private String descricao;
@@ -29,18 +30,26 @@ public class Produto {
     @Column
     private String status;
 
-    public Long getId() {
+    @Column
+    private String data_cadastro;
 
-        return id;
+    public Long getId_item() {
+        return id_item;
     }
 
-    public void setId(Long id) {
+    public void setId_item(Long id_item) {
+        this.id_item = id_item;
+    }
 
-        this.id = id;
+    public String getData_cadastro() {
+        return data_cadastro;
+    }
+
+    public void setData_cadastro(String data_cadastro) {
+        this.data_cadastro = data_cadastro;
     }
 
     public String getStatus() {
-
         return status;
     }
 
@@ -49,52 +58,43 @@ public class Produto {
     }
 
     public String getCategoria() {
-
         return categoria;
     }
 
     public void setCategoria(String categoria) {
-
         this.categoria = categoria;
     }
 
     public String getDescricao() {
-
         return descricao;
     }
 
     public void setDescricao(String descricao) {
-
         this.descricao = descricao;
     }
 
-    public Integer getQuantidade() {
-
-        return quantidade;
+    public Integer getEstoque() {
+        return estoque;
     }
 
-    public void setQuantidade(Integer quantidade) {
-
-        this.quantidade = quantidade;
+    public void setEstoque(Integer estoque) {
+        this.estoque = estoque;
     }
 
-    public Double getPreco() {
-        return preco;
+    public String getNome_item() {
+        return nome_item;
     }
 
-    public void setPreco(Double preco) {
-
-        this.preco = preco;
+    public void setNome_item(String nome_item) {
+        this.nome_item = nome_item;
     }
 
-    public String getNome() {
-
-        return nome;
+    public BigDecimal getPreco_atual() {
+        return preco_atual;
     }
 
-    public void setNome(String nome) {
-
-        this.nome = nome;
+    public void setPreco_atual(BigDecimal preco_atual) {
+        this.preco_atual = preco_atual;
     }
 
     @Override
@@ -102,13 +102,11 @@ public class Produto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Produto produto = (Produto) o;
-        return Objects.equals(id, produto.id) && Objects.equals(nome, produto.nome) && Objects.equals(preco, produto.preco) && Objects.equals(quantidade, produto.quantidade) && Objects.equals(descricao, produto.descricao) && Objects.equals(categoria, produto.categoria) && Objects.equals(status, produto.status);
+        return Objects.equals(id_item, produto.id_item) && Objects.equals(nome_item, produto.nome_item) && Objects.equals(preco_atual, produto.preco_atual) && Objects.equals(estoque, produto.estoque) && Objects.equals(descricao, produto.descricao) && Objects.equals(categoria, produto.categoria) && Objects.equals(status, produto.status) && Objects.equals(data_cadastro, produto.data_cadastro);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, preco, quantidade, descricao, categoria, status);
+        return Objects.hash(id_item, nome_item, preco_atual, estoque, descricao, categoria, status, data_cadastro);
     }
 }
-
-

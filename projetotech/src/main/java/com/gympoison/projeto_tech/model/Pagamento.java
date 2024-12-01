@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 @Entity
 @Table
 public class Pagamento {
-    @Column(name = "Pagamento")
-    private String Pagamento;
+    @Column(name = "pagamento")
+    private String pagamento;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,6 @@
 package com.gympoison.projeto_tech.controller;
 
-import com.gympoison.projeto_tech.model.Pagamento;
+import com.gympoison.projeto_tech.model.Ipedido;
 import com.gympoison.projeto_tech.repository.PagamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

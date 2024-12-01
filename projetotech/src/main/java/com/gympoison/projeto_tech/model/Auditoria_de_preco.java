@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table
 public class Auditoria_de_preco {
     @Column(name = "auditoria_de_preco")
-    private String Auditoria_de_preco;
+    private String auditoria_de_preco;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

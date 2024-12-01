@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 @Table
 public class Ipedido {
     @Column(name = "item_pedido")
-    private String Ipedido;
+    private String item_pedido;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

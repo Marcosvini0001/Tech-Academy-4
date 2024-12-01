@@ -38,8 +38,8 @@ public class ProdutoController {
     public ResponseEntity<Produto> save(@Valid @RequestBody ProdutoRequestDTO dto) {
 
         Produto produto = new Produto();
-        produto.setNome(dto.nome());
-        produto.setPreco(dto.preco());
+        produto.setNome_item(dto.nome());
+        produto.setPreco_atual(dto.preco());
         produto.setDescricao(dto.descricao());
         produto.setCategoria(dto.categoria());
         produto.setStatus(dto.status());
@@ -65,8 +65,8 @@ public class ProdutoController {
         Produto produto = this.repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não foi encontrado"));
 
-        produto.setNome(dto.nome());
-        produto.setPreco(dto.preco());
+        produto.setNome_item(dto.nome());
+        produto.setPreco_atual(dto.preco());
         produto.setDescricao(dto.descricao());
         produto.setStatus(dto.status());
 

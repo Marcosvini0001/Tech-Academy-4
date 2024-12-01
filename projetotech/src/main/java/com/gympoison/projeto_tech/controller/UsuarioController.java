@@ -26,7 +26,7 @@ public class UsuarioController {
 
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDTO>> findAll() {
-        List<Usuario> usuario = repository.findAll(); // esta dando erro nessa linha
+        List<Usuario> usuario = repository.findAll();
         List<UsuarioResponseDTO> responseDTO = usuario.stream()
                 .map(UsuarioResponseDTO::new)
                 .toList();
@@ -34,8 +34,8 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioResponseDTO> findById(@PathVariable Integer id) {
-        Usuario usuario = repository.findById(Id_usuario).orElseThrow(() ->
+    public ResponseEntity<UsuarioResponseDTO> findById(@PathVariable Integer id_usuario) {
+        Usuario usuario = repository.findById(id_usuario).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
         return ResponseEntity.ok(new UsuarioResponseDTO(usuario));}
 
@@ -44,11 +44,11 @@ public class UsuarioController {
     public ResponseEntity<Usuario> save(@Valid @RequestBody UsuarioRequestDTO dto){
 
         Usuario usuario = new Usuario();
-        usuario.setId(dto.id());
-        usuario.setNome(dto.nome());
+        usuario.setId(dto.id_usuario());
+        usuario.setNome(dto.nm_usuario());
         usuario.setEmail(dto.email());
-        usuario.setCep(dto.cep());
-        usuario.setEndereco(dto.endereco());
+        usuario.setCep(dto.cep_usuario());
+        usuario.setEndereco(dto.end_usuario());
 
         this.repository.save(usuario);
         return ResponseEntity.ok(usuario);
@@ -56,8 +56,8 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Integer id) {
-        Usuario usuario = repository.findById(Id_usuario)
+    public ResponseEntity<String> delete(@PathVariable Integer id_usuario) {
+        Usuario usuario = repository.findById(id_usuario)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
         repository.delete(usuario);
         return ResponseEntity.ok("Usuário removido com sucesso");
@@ -65,19 +65,18 @@ public class UsuarioController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> update(@PathVariable Integer id,@Valid @RequestBody UsuarioRequestDTO dto){
-        Usuario usuario = repository.findById(Id_usuario)
+    public ResponseEntity<Usuario> update(@PathVariable Integer id_usuario,@Valid @RequestBody UsuarioRequestDTO dto){
+        Usuario usuario = repository.findById(id_usuario)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
 
-        usuario.setId(dto.id());
-        usuario.setNome(dto.nome());
+        usuario.setId(dto.id_usuario());
+        usuario.setNome(dto.nm_usuario());
         usuario.setEmail(dto.email());
-        usuario.setCep(dto.cep());
-        usuario.setEndereco(dto.endereco());
+        usuario.setCep(dto.cep_usuario());
+        usuario.setEndereco(dto.end_usuario());
 
         repository.save(usuario);
         return ResponseEntity.ok(usuario);
     }
 
 }
-

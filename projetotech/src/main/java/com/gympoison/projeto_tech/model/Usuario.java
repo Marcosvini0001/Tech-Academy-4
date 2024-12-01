@@ -10,29 +10,29 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id_usuario;
+    private Integer id_usuario;
 
     @Column(name = "name")
-    private String nome;
+    private String nm_usuario;
 
     @Column
-    private Integer cep;
+    private Integer cep_usuario;
 
     @Column
     private String email;
 
     @Column
-    private String endereco;
+    private String end_usuario;
 
     @Column
     private Integer Senha;
 
     public Integer getId() {
-        return Id_usuario;
+        return id_usuario;
     }
 
     public void setId(Integer id) {
-        Id_usuario = id;
+        id_usuario = id;
     }
 
     public Integer getSenha() {
@@ -44,11 +44,11 @@ public class Usuario {
     }
 
     public String getEndereco() {
-        return endereco;
+        return end_usuario;
     }
 
     public void setEndereco(String endereco) {
-        this.endereco = endereco;
+        this.end_usuario = endereco;
     }
 
     public String getEmail() {
@@ -60,19 +60,19 @@ public class Usuario {
     }
 
     public Integer getCep() {
-        return cep;
+        return cep_usuario;
     }
 
     public void setCep(Integer cep) {
-        this.cep = cep;
+        this.cep_usuario = cep;
     }
 
     public String getNome() {
-        return nome;
+        return nm_usuario;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nm_usuario = nome;
     }
 
     @Override
@@ -80,11 +80,13 @@ public class Usuario {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return Objects.equals(Id_usuario, usuario.Id_usuario) && Objects.equals(nome, usuario.nome) && Objects.equals(cep, usuario.cep) && Objects.equals(email, usuario.email) && Objects.equals(endereco, usuario.endereco) && Objects.equals(Senha, usuario.Senha);
+        return Objects.equals(id_usuario, usuario.id_usuario) && Objects.equals(nm_usuario, usuario.nm_usuario)
+                && Objects.equals(cep_usuario, usuario.cep_usuario) && Objects.equals(email, usuario.email) && Objects.equals(end_usuario,
+                usuario.end_usuario) && Objects.equals(Senha, usuario.Senha);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id_usuario, nome, cep, email, endereco, Senha);
+        return Objects.hash(id_usuario, nm_usuario, cep_usuario, email, end_usuario, Senha);
     }
 }
