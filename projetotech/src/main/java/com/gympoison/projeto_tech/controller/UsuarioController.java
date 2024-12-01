@@ -4,7 +4,6 @@ import com.gympoison.projeto_tech.dto.UsuarioRequestDTO;
 import com.gympoison.projeto_tech.model.Usuario;
 import com.gympoison.projeto_tech.repository.UsuarioRepository;
 import com.gympoison.projeto_tech.response.UsuarioResponseDTO;
-import jakarta.persistence.Column;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,7 +54,7 @@ public class UsuarioController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id_usuario}")
     public ResponseEntity<String> delete(@PathVariable Integer id_usuario) {
         Usuario usuario = repository.findById(id_usuario)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
@@ -64,7 +63,7 @@ public class UsuarioController {
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id_usuario}")
     public ResponseEntity<Usuario> update(@PathVariable Integer id_usuario,@Valid @RequestBody UsuarioRequestDTO dto){
         Usuario usuario = repository.findById(id_usuario)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));

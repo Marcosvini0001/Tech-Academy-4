@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table
+@Table(name = "pagamento")
 public class Pagamento {
-    @Column(name = "pagamento")
+    @Column
     private String pagamento;
 
     @Id
@@ -27,7 +27,10 @@ public class Pagamento {
 
     @Column
     private Double id_forma_pagamento;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "id_item", referencedColumnName = "id_item")
+    private Item item;
     public Double getId_pagamento() {
         return id_pagamento;
     }
