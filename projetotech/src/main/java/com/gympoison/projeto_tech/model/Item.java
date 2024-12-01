@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Table
 @Entity
-public class Produto {
+public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_item;
@@ -101,8 +101,8 @@ public class Produto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Produto produto = (Produto) o;
-        return Objects.equals(id_item, produto.id_item) && Objects.equals(nome_item, produto.nome_item) && Objects.equals(preco_atual, produto.preco_atual) && Objects.equals(estoque, produto.estoque) && Objects.equals(descricao, produto.descricao) && Objects.equals(categoria, produto.categoria) && Objects.equals(status, produto.status) && Objects.equals(data_cadastro, produto.data_cadastro);
+        Item item = (Item) o;
+        return Objects.equals(id_item, item.id_item) && Objects.equals(nome_item, item.nome_item) && Objects.equals(preco_atual, item.preco_atual) && Objects.equals(estoque, item.estoque) && Objects.equals(descricao, item.descricao) && Objects.equals(categoria, item.categoria) && Objects.equals(status, item.status) && Objects.equals(data_cadastro, item.data_cadastro);
     }
 
     @Override
