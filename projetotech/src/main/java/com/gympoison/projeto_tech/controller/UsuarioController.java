@@ -22,18 +22,20 @@ public class UsuarioController {
         @Autowired
         private UsuarioRepository repository;
 
+        private UsuarioResponseDTO responseDTO;
+
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDTO>> findAll() {
-        List<UsuarioRepository> usuarios = repository.findAll();
-        List<UsuarioResponseDTO> responseDTOs = usuarios.stream()
-                .map(UsuarioResponseDTO::new)
+        List<Usuario> usuario = repository.findAll();
+        List<UsuarioResponseDTO> responseDTOs = usuario.stream()
+                .map(UsuarioResponseDTO::new) // esta dando erro nessa linha em NEW
                 .toList();
         return ResponseEntity.ok(responseDTOs);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioResponseDTO> findById(@PathVariable Integer id) {
-        Usuario usuario = repository.findById(id).orElseThrow(() ->
+        Usuario usuario = repository.findById(id).orElseThrow(() -> // esta dando erro nessa linha em (id)
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
         return ResponseEntity.ok(new UsuarioResponseDTO(usuario));}
 
@@ -48,23 +50,23 @@ public class UsuarioController {
         usuario.setCep(dto.cep());
         usuario.setEndereco(dto.endereco());
 
-        this.repository.save(usuario);
+        this.repository.save(usuario); // esta dando erro nessa linha
         return ResponseEntity.ok(usuario);
 
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) {
-        Usuario usuario = repository.findById(id)
+        Usuario usuario = repository.findById(id) // esta dando erro nessa linha em (id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
-        repository.delete(usuario);
+        repository.delete(usuario); // esta dando erro nessa linha
         return ResponseEntity.ok("Usuário removido com sucesso");
     }
 
 
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> update(@PathVariable Integer id,@Valid @RequestBody UsuarioRequestDTO dto){
-        Usuario usuario = repository.findById(id)
+        Usuario usuario = repository.findById(id) // esta dando erro nessa linha em (id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
 
         usuario.setId(dto.id());
@@ -73,7 +75,7 @@ public class UsuarioController {
         usuario.setCep(dto.cep());
         usuario.setEndereco(dto.endereco());
 
-        repository.save(usuario);
+        repository.save(usuario); // esta dando erro nessa linha
         return ResponseEntity.ok(usuario);
     }
 
