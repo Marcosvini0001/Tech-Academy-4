@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/api/usuario")
 public class UsuarioController {
 
         @Autowired
@@ -26,11 +26,11 @@ public class UsuarioController {
 
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDTO>> findAll() {
-        List<Usuario> usuario = repository.findAll();
-        List<UsuarioResponseDTO> responseDTOs = usuario.stream()
-                .map(UsuarioResponseDTO::new) // esta dando erro nessa linha em NEW
+        List<Usuario> usuario = repository.findAll(); // esta dando erro nessa linha
+        List<UsuarioResponseDTO> responseDTO = usuario.stream()
+                .map(UsuarioResponseDTO::new)
                 .toList();
-        return ResponseEntity.ok(responseDTOs);
+        return ResponseEntity.ok(responseDTO);
     }
 
     @GetMapping("/{id}")
