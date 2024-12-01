@@ -1,5 +1,6 @@
 package com.gympoison.projeto_tech.controller;
 
+import com.gympoison.projeto_tech.dto.IpedidoRequestDTO;
 import com.gympoison.projeto_tech.model.Ipedido;
 import com.gympoison.projeto_tech.repository.PagamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class IpedidoController {
     @Autowired
     private PagamentoRepository repository;
 
-    @GetMapping("/item_pedidos")
+    @GetMapping("/item_pedido")
     public ResponseEntity<List<Double>> findAll() {
         List<Double> pedidos = repository.findAll();
         return ResponseEntity.ok(pedidos);

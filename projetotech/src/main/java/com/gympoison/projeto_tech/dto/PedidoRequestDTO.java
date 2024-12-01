@@ -1,5 +1,6 @@
 package com.gympoison.projeto_tech.dto;
 
+import com.gympoison.projeto_tech.model.Pedido;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import jakarta.validation.constraints.NotNull;

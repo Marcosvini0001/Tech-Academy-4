@@ -15,7 +15,7 @@ public class Pedido {
     private Double id_pedido;
 
     @Column
-    private Double id_cliente;
+    private Integer id_cliente;
 
     @Column
     private Double data_pedido;
@@ -54,12 +54,20 @@ public class Pedido {
         this.id_pedido = id_pedido;
     }
 
+    public Integer getcliente() {
+
+        return id_cliente;
+    }
+
+    public void setid_cliente(Integer id_cliente) {
+        this.id_cliente = id_cliente;
+    }
+
     public Double getdata_pedido() {
 
         return data_pedido;
     }
-
-    public void setdata_pedido(Double cdata_pedido) {
+    public void setdata_pedido(Double data_pedido) {
 
         this.data_pedido = data_pedido;
     }
@@ -111,6 +119,11 @@ public class Pedido {
     public void setobservacoes(String observacoes) {
 
         this.observacoes = observacoes;
+    }
+
+    public void setid_cliente(Usuario usuario) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setid_cliente'");
     }
     
 }
