@@ -34,14 +34,14 @@ public class IpedidoController {
 
     @GetMapping
     public ResponseEntity <List<Ipedido>> findAll(){
-        List<Ipedido> Ipedido = repository.findAll();
+        List<Ipedido> Ipedido = repository.findAll(); // Erro aqui
         return ResponseEntity.ok(Ipedido);
 
     }
 
    @GetMapping("/{id}")
     public ResponseEntity <Ipedido> findById(@PathVariable Integer id_item_pedido){
-        Ipedido Ipedido = repository.findById(id_item_pedido).orElseThrow(
+        Ipedido Ipedido = repository.findById(id_item_pedido).orElseThrow( // Erro aqui em (id_item_pedido)
         () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "item do pedido não encontrado"));
 
               return ResponseEntity.ok(Ipedido);
@@ -54,15 +54,15 @@ public class IpedidoController {
        Pedido pedido = pedidoRepository.findById(dto.id_pedido())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
 
-     Item item = ItemRepository.findById(dto.id_pedido())
+     Item item = ItemRepository.findById(dto.id_pedido()) // Erro aqui em findById
          .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
 
 
          Ipedido Ipedido = new Ipedido();
-         Ipedido.setId_item_pedido(pedido);
-         Ipedido.setId_pedido(item);
+         Ipedido.setId_item_pedido(dto.id_item_pedido());
+         Ipedido.setId_pedido(dto.id_pedido());
 
-         Ipedido.setPreco(dto.preco());
+         Ipedido.setPreco_unitario(dto.preco_unitario());
          Ipedido.setQuantidade(dto.quantidade());
 
 
