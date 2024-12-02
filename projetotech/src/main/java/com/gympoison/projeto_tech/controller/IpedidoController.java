@@ -30,7 +30,7 @@ public class IpedidoController {
     private PedidoRepository pedidoRepository;
 
     @Autowired
-    private ItemRepository IpedidoRepository;
+    private IpedidoRepository IpedidoRepository;
 
     @GetMapping
     public ResponseEntity <List<Ipedido>> findAll(){
@@ -41,10 +41,10 @@ public class IpedidoController {
 
    @GetMapping("/{id}")
     public ResponseEntity <Ipedido> findById(@PathVariable Integer id_item_pedido){
-        Ipedido itempedido = repository.findById(id_item_pedido).orElseThrow(
+        Ipedido Ipedido = repository.findById(id_item_pedido).orElseThrow(
         () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "item do pedido não encontrado"));
 
-              return ResponseEntity.ok(itempedido);
+              return ResponseEntity.ok(Ipedido);
     }
 
 
@@ -54,13 +54,13 @@ public class IpedidoController {
        Pedido pedido = pedidoRepository.findById(dto.id_pedido())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
 
-     Item item = ItemRepository.findById(dto.id_item())
+     Item item = ItemRepository.findById(dto.id_pedido())
          .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
 
 
          Ipedido Ipedido = new Ipedido();
-         Ipedido.setIpedido(pedido);
-         Ipedido.setid_item(item);
+         Ipedido.setId_item_pedido(pedido);
+         Ipedido.setId_pedido(item);
 
          Ipedido.setPreco(dto.preco());
          Ipedido.setQuantidade(dto.quantidade());

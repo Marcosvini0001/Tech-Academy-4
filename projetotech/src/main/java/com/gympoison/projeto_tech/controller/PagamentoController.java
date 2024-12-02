@@ -77,8 +77,8 @@ public class PagamentoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity <Pagamento> delete(@PathVariable Integer id){
-        Pagamento pagamento = repository.findById(id).orElseThrow(
+    public ResponseEntity <Pagamento> delete(@PathVariable Integer id_pagamento){
+        Pagamento pagamento = repository.findById(id_pagamento).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pagamento não encontrado"));
 
         repository.delete(pagamento);
