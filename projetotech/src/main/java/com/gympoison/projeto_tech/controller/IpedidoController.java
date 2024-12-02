@@ -66,20 +66,20 @@ public class IpedidoController {
          Ipedido.setQuantidade(dto.quantidade());
 
 
-        repository.save(Ipedido);
+        repository.save(Ipedido); // Erro aqui
         return ResponseEntity.status(HttpStatus.CREATED).body(Ipedido);
 
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity <Ipedido> update(@PathVariable Integer id, @Valid @RequestBody ItemPedidoRequestDTO dto) {
+    public ResponseEntity <Ipedido> update(@PathVariable Integer id, @Valid @RequestBody IpedidoRequestDTO dto) {
         Ipedido Ipedido = repository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "item do pedido não encontrado"));
 
-        Pedido pedido = pedidoRepository.findById(dto.pedidoId())
+        Pedido pedido = pedidoRepository.findById(dto.id_pedido())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
 
-        Item item = ItemRepository.findById(dto.produtoId())
+        Item item = ItemRepository.findById(dto.id_produto()) // Erro aqui em findById
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
 
                 Ipedido.setId_pedido(dto.id_pedido());
@@ -87,17 +87,17 @@ public class IpedidoController {
                 Ipedido.setPreco_unitario(dto.preco_unitario());
                 Ipedido.setTotal_item(dto.total_item());
 
-        repository.save(Ipedido);
+        repository.save(Ipedido); // Erro aqui
         return ResponseEntity.ok(Ipedido);
 
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity <Ipedido> delete(@PathVariable Double id_item_pedido){
-        Ipedido Ipedido = repository.findById(id_item_pedido).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "item do pedido não encontrado"));
+    public ResponseEntity <Ipedido> delete(@PathVariable Double id_item_pedido ){
+        Ipedido Ipedido = repository.findById(id_item_pedido).orElseThrow( // Erro aqui
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "item do pedido não encontrado")); // Erro aqui
 
-        repository.delete(Ipedido);
+        repository.delete(Ipedido); // Erro aqui em (Ipedido)
         return ResponseEntity.noContent().build();
     }
 }
