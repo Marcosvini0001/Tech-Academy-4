@@ -11,7 +11,7 @@ public class Ipedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Double id_item_pedido;
+    private Integer id_item_pedido;
 
     @Column
     private Double id_pedido;
@@ -27,6 +27,7 @@ public class Ipedido {
 
     @Column
     private Double total_item;
+
 
     public String getItem_pedido() {
         return item_pedido;
@@ -76,11 +77,11 @@ public class Ipedido {
         this.id_pedido = id_pedido;
     }
 
-    public Double getId_item_pedido() {
+    public Integer getId_item_pedido() {
         return id_item_pedido;
     }
 
-    public void setId_item_pedido(Double id_item_pedido) {
+    public void setId_item_pedido(Integer id_item_pedido) {
         this.id_item_pedido = id_item_pedido;
     }
 }

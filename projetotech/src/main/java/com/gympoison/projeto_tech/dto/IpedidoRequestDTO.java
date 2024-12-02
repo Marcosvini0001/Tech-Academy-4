@@ -7,4 +7,4 @@ public record IpedidoRequestDTO(@NotNull Double id_pedido,
 @NotNull Double quantidade,
 @NotNull Double preco_unitario,
 @NotNull Double total_item,
-@NotNull Double id_item_pedido){}
+@NotNull Integer id_item_pedido){}
