@@ -79,13 +79,13 @@ public class IpedidoController {
         Pedido pedido = pedidoRepository.findById(dto.pedidoId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
 
-        Produto produto = produtoRepository.findById(dto.produtoId())
+        Item item = ItemRepository.findById(dto.produtoId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
 
-                Ipedido.setPedidoId(pedido);
-                Ipedido.setProdutoId(produto);
-                Ipedido.setPreco(dto.preco());
-                Ipedido.setQuantidade(dto.quantidade());
+                Ipedido.setId_pedido(dto.id_pedido());
+                Ipedido.setId_produto(dto.id_produto());
+                Ipedido.setPreco_unitario(dto.preco_unitario());
+                Ipedido.setTotal_item(dto.total_item());
 
         repository.save(Ipedido);
         return ResponseEntity.ok(Ipedido);
@@ -93,8 +93,8 @@ public class IpedidoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity <Ipedido> delete(@PathVariable Integer id){
-        Ipedido Ipedido = repository.findById(id).orElseThrow(
+    public ResponseEntity <Ipedido> delete(@PathVariable Double id_item_pedido){
+        Ipedido Ipedido = repository.findById(id_item_pedido).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "item do pedido não encontrado"));
 
         repository.delete(Ipedido);
