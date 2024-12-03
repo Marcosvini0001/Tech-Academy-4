@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/item_pedidos")
+@RequestMapping("/{item_pedido}")
 public class IpedidoController {
 
     @Autowired
@@ -35,7 +35,7 @@ public class IpedidoController {
         return ResponseEntity.ok(ipedidos);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{item_pedido}")
     public ResponseEntity<Ipedido> findById(@PathVariable Integer id_item_pedido) {
         Ipedido ipedido = ipedidoRepository.findById(id_item_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item do pedido não encontrado"));
@@ -61,9 +61,9 @@ public class IpedidoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ipedido);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Ipedido> update(@PathVariable Integer id, @Valid @RequestBody IpedidoRequestDTO dto) {
-        Ipedido ipedido = ipedidoRepository.findById(id)
+    @PutMapping("/{item_pedido}")
+    public ResponseEntity<Ipedido> update(@PathVariable Integer id_item_pedido, @Valid @RequestBody IpedidoRequestDTO dto) {
+        Ipedido ipedido = ipedidoRepository.findById(id_item_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item do pedido não encontrado"));
 
         Pedido pedido = pedidoRepository.findById(dto.id_pedido())
@@ -82,9 +82,9 @@ public class IpedidoController {
         return ResponseEntity.ok(ipedido);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        Ipedido ipedido = ipedidoRepository.findById(id)
+    @DeleteMapping("/{item_pedido}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id_item_pedido) {
+        Ipedido ipedido = ipedidoRepository.findById(id_item_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item do pedido não encontrado"));
 
         ipedidoRepository.delete(ipedido);
