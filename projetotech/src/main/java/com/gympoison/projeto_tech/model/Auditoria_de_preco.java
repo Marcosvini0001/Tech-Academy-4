@@ -1,74 +1,79 @@
 package com.gympoison.projeto_tech.model;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "auditoria_de_preco")
 public class Auditoria_de_preco {
-    @Column
-    private String auditoria_de_preco;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_auditoria;
+    @Column(name = "id_auditoria")
+    private Integer idAuditoria;
 
-    @Column
-    private Integer id_produto;
+    @Column(name = "id_produto")
+    private Integer idProduto;
 
-    @Column
-    private BigDecimal preco_antigo;
+    @Column(name = "preco_antigo")
+    private BigDecimal precoAntigo;
 
-    @Column
-    private BigDecimal preco_novo;
+    @Column(name = "preco_novo")
+    private BigDecimal precoNovo;
 
-    @Column
-    private BigDecimal data_alteracao;
+    @Column(name = "data_alteracao")
+    private LocalDateTime dataAlteracao; 
 
-    @Column
+    @Column(name = "motivo")
     private String motivo;
 
-    public Integer getId_auditoria() {
-        return id_auditoria;
-    }
-    public void setId_auditoria(Integer id_auditoria) {
-        this.id_auditoria = id_auditoria;
+
+    public Integer getIdAuditoria() {
+        return idAuditoria;
     }
 
-    public Integer getId_produto(){
-        return id_produto;
-    }
-    public void setId_produto(Integer id_produto){
-        this.id_produto = id_produto;
+    public void setIdAuditoria(Integer idAuditoria) {
+        this.idAuditoria = idAuditoria;
     }
 
-    public BigDecimal getpreco_antigo(){
-        return preco_antigo;
-    }
-    public void setpreco_antigo(BigDecimal preco_antigo){
-        this.preco_antigo = preco_antigo;
+    public Integer getIdProduto() {
+        return idProduto;
     }
 
-    public BigDecimal getpreco_novo(){
-        return preco_novo;
-    }
-    public void setpreco_novo(BigDecimal preco_novo){
-        this.preco_novo = preco_novo;
+    public void setIdProduto(Integer idProduto) {
+        this.idProduto = idProduto;
     }
 
-    public String getmotivo(){
+    public BigDecimal getPrecoAntigo() {
+        return precoAntigo;
+    }
+
+    public void setPrecoAntigo(BigDecimal precoAntigo) {
+        this.precoAntigo = precoAntigo;
+    }
+
+    public BigDecimal getPrecoNovo() {
+        return precoNovo;
+    }
+
+    public void setPrecoNovo(BigDecimal precoNovo) {
+        this.precoNovo = precoNovo;
+    }
+
+    public LocalDateTime getDataAlteracao() {
+        return dataAlteracao;
+    }
+
+    public void setDataAlteracao(LocalDateTime dataAlteracao) {
+        this.dataAlteracao = dataAlteracao;
+    }
+
+    public String getMotivo() {
         return motivo;
     }
-    public void setmotivo(String motivo){
+
+    public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
-
-    public BigDecimal getdata_alteracao(){
-        return data_alteracao;
-    }
-    public void setdata_alteracao(BigDecimal data_alteracao){
-        this.data_alteracao = data_alteracao;
-    }
-
 }

@@ -1,5 +1,6 @@
 package com.gympoison.projeto_tech.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;

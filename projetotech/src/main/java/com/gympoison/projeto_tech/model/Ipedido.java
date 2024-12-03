@@ -4,18 +4,19 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "item_pedido")
 public class Ipedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_item_pedido;
+    private Integer id_item_pedido; // Essa é a chave primária
 
     @ManyToOne
-    @JoinColumn(name = "id_pedido", nullable = false)
+    @JoinColumn(name = "id_pedido", nullable = false) // Use a coluna correta para o relacionamento com Pedido
     private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn(name = "id_item", nullable = false)
+    @JoinColumn(name = "id_produto", nullable = false) // Use a coluna correta para o relacionamento com Produto
     private Item item;
 
     @Column(nullable = false)

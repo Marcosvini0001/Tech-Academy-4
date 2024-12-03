@@ -47,7 +47,7 @@ public class PedidoController {
         Pedido pedido = new Pedido();
         pedido.setid_cliente(usuario);
         pedido.setid_cliente(dto.id_cliente());
-        pedido.setstatus_pedido(dto.status_pedido());
+        pedido.setstatus_pedido(dto.Status_pedido());
         pedido.settotal_pedido(dto.total_pedido());
 
 
@@ -74,7 +74,7 @@ public class PedidoController {
 
             pedido.setid_cliente(usuario);
             pedido.setid_cliente(dto.id_cliente());
-            pedido.setstatus_pedido(dto.status_pedido());
+            pedido.setstatus_pedido(dto.Status_pedido());
             pedido.settotal_pedido(dto.total_pedido());
 
         repository.save(pedido);

@@ -20,33 +20,27 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository repository;
 
-
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDTO>> findAll() {
+        List<Usuario> usuario = repository.findAll();
 
-        List<Usuario> usuarios = repository.findAll();
-
-
-        if (usuarios == null || usuarios.isEmpty()) {
+        if (usuario.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
 
-        // Mapeia os usuários para o DTO
-        List<UsuarioResponseDTO> responseDTOList = usuarios.stream()
+        List<UsuarioResponseDTO> responseDTOList = usuario.stream()
                 .map(UsuarioResponseDTO::new)
                 .toList();
 
         return ResponseEntity.ok(responseDTOList);
     }
 
-
-    @GetMapping("/id_usuario")
+    @GetMapping("/{id_usuario}")
     public ResponseEntity<UsuarioResponseDTO> findById(@PathVariable Integer id_usuario) {
-        Usuario usuario = repository.findById(id_usuario).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
+        Usuario usuario = repository.findById(id_usuario)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
         return ResponseEntity.ok(new UsuarioResponseDTO(usuario));
     }
-
 
     @PostMapping
     public ResponseEntity<Usuario> save(@Valid @RequestBody UsuarioRequestDTO dto) {
@@ -62,8 +56,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
-
-    @DeleteMapping("/id_usuario")
+    @DeleteMapping("/{id_usuario}")
     public ResponseEntity<String> delete(@PathVariable Integer id_usuario) {
         Usuario usuario = repository.findById(id_usuario)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
@@ -71,7 +64,7 @@ public class UsuarioController {
         return ResponseEntity.ok("Usuário removido com sucesso");
     }
 
-    @PutMapping("/id_usuario")
+    @PutMapping("/{id_usuario}")
     public ResponseEntity<Usuario> update(@PathVariable Integer id_usuario, @Valid @RequestBody UsuarioRequestDTO dto) {
         Usuario usuario = repository.findById(id_usuario)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));

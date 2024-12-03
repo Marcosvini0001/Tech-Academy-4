@@ -29,6 +29,7 @@ public class Item {
     @Column
     private String categoria;
 
+
     @Column
     private Enum status;
 

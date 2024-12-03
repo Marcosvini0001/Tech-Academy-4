@@ -3,6 +3,7 @@ package com.gympoison.projeto_tech.dto;
 import com.gympoison.projeto_tech.model.Usuario;
 import jakarta.persistence.Column;
 
+
 public record UsuarioRequestDTO(
         Integer id_usuario,
         String nm_usuario,
@@ -12,4 +13,5 @@ public record UsuarioRequestDTO(
         String senha
 ) {
 }
+
 

@@ -2,7 +2,7 @@ package com.gympoison.projeto_tech.model;
 
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
-
+import com.gympoison.projeto_tech.model.StatusPedido;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

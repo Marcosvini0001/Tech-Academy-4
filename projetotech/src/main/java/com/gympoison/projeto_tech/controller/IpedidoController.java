@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/itens_pedido")
+@RequestMapping("/id_item_pedido")
 public class IpedidoController {
 
     @Autowired
@@ -29,18 +29,21 @@ public class IpedidoController {
     @Autowired
     private ItemRepository itemRepository;
 
+  
     @GetMapping
     public ResponseEntity<List<Ipedido>> findAll() {
         List<Ipedido> itensPedido = ipedidoRepository.findAll();
         return ResponseEntity.ok(itensPedido);
     }
 
-    @GetMapping("/id_item_pedido")
+
+    @GetMapping("/{id_item_pedido}")
     public ResponseEntity<Ipedido> findById(@PathVariable Integer id_item_pedido) {
         Ipedido ipedido = ipedidoRepository.findById(id_item_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item do pedido não encontrado"));
         return ResponseEntity.ok(ipedido);
     }
+
 
     @PostMapping
     public ResponseEntity<Ipedido> create(@Valid @RequestBody IpedidoRequestDTO dto) {
@@ -61,7 +64,7 @@ public class IpedidoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ipedido);
     }
 
-    @PutMapping("/id_item_pedido")
+    @PutMapping("/{id_item_pedido}")
     public ResponseEntity<Ipedido> update(@PathVariable Integer id_item_pedido, @Valid @RequestBody IpedidoRequestDTO dto) {
         Ipedido ipedido = ipedidoRepository.findById(id_item_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item do pedido não encontrado"));
@@ -82,7 +85,7 @@ public class IpedidoController {
         return ResponseEntity.ok(ipedido);
     }
 
-    @DeleteMapping("/id_item_pedido")
+    @DeleteMapping("/{id_item_pedido}")
     public ResponseEntity<Void> delete(@PathVariable Integer id_item_pedido) {
         Ipedido ipedido = ipedidoRepository.findById(id_item_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item do pedido não encontrado"));
@@ -90,4 +93,5 @@ public class IpedidoController {
         ipedidoRepository.delete(ipedido);
         return ResponseEntity.noContent().build();
     }
+
 }
