@@ -25,7 +25,7 @@ public class ItemController {
         return ResponseEntity.ok(item);
     }
 
-    @GetMapping("/id_item")
+    @GetMapping("/{id_item_pedido}")
     public ResponseEntity<Item> findById(@PathVariable Integer id_item) {
        Item item = this.repository.findById(id_item)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não foi encontrado"));
@@ -47,7 +47,7 @@ public class ItemController {
     }
 
 
-    @DeleteMapping("/id_item")
+    @DeleteMapping("/{id_item_pedido}")
     public ResponseEntity<Void> delete(@PathVariable Integer id_item) {
         Item item = this.repository.findById(id_item)
                 .orElseThrow(() ->
@@ -57,7 +57,7 @@ public class ItemController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/id_item")
+    @PutMapping("/{id_item_pedido}")
     public ResponseEntity<Item> update(@PathVariable Integer id_item, @Valid @RequestBody ItemRequestDTO dto) {
 
         Item item = this.repository.findById(id_item)

@@ -1,8 +1,10 @@
 package com.gympoison.projeto_tech.model;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Table
@@ -10,7 +12,7 @@ import java.util.Objects;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_item;
+    private Integer id_item;
 
     @Column
     private String nome_item;
@@ -28,32 +30,33 @@ public class Item {
     private String categoria;
 
     @Column
-    private String status;
+    private Enum status;
 
-    @Column
-    private String data_cadastro;
+    @Temporal(TemporalType.TIMESTAMP) // Define que o campo será armazenado como data e hora
+    @Column(nullable = false)
+    private LocalDateTime data_cadastro;
 
-    public Long getId_item() {
+    public Integer getId_item() {
         return id_item;
     }
 
-    public void setId_item(Long id_item) {
+    public void setId_item(Integer id_item) {
         this.id_item = id_item;
     }
 
-    public String getData_cadastro() {
+    public LocalDateTime getData_cadastro() {
         return data_cadastro;
     }
 
-    public void setData_cadastro(String data_cadastro) {
+    public void setData_cadastro(LocalDateTime data_cadastro) {
         this.data_cadastro = data_cadastro;
     }
 
-    public String getStatus() {
+    public Enum getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Enum status) {
         this.status = status;
     }
 

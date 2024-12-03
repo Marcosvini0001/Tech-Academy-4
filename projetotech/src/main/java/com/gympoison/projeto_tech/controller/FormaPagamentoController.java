@@ -12,7 +12,11 @@ public class FormaPagamentoController {
     private List<FormaPagamento> FormaPagamentoRepository;
 
     public ResponseEntity<List<FormaPagamento>> findAll() {
-        List<FormaPagamento> formaPagamento  = this.repository.findAll();
+        List<FormaPagamento> id_forma_pagamento  = this.repository.findAll();
         return ResponseEntity.ok(FormaPagamentoRepository);
+    }
+
+    public void setFormaPagamentoRepository(List<FormaPagamento> formaPagamentoRepository) {
+        FormaPagamentoRepository = formaPagamentoRepository;
     }
 }

@@ -25,7 +25,7 @@ public class Usuario {
     private String end_usuario;
 
     @Column
-    private Integer senha;
+    private String senha;
 
     public Integer getId() {
         return id_usuario;
@@ -35,11 +35,11 @@ public class Usuario {
         this.id_usuario = id_usuario;
     }
 
-    public Integer getSenha() {
+    public String getSenha() {
         return senha;
     }
 
-    public void setsenha(Integer senha) {
+    public void setSenha(String senha) {
         this.senha = senha;
     }
 

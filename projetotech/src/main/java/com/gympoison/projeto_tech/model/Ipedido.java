@@ -2,12 +2,14 @@ package com.gympoison.projeto_tech.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 
 @Entity
 @Table
 public class Ipedido {
     @Column(name = "item_pedido")
-    private String item_pedido;
+    public String item_pedido;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +24,11 @@ public class Ipedido {
     @Column
     private Integer quantidade;
 
-    @Column
-    private Integer preco_unitario;
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal preco_unitario;
 
-    @Column
-    private Integer total_item;
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal total_item;
 
     public String getItem_pedido() {
         return item_pedido;
@@ -36,19 +38,19 @@ public class Ipedido {
         this.item_pedido = item_pedido;
     }
 
-    public Integer getTotal_item() {
+    public BigDecimal getTotal_item() {
         return total_item;
     }
 
-    public void setTotal_item(Integer total_item) {
+    public void setTotal_item(BigDecimal total_item) {
         this.total_item = total_item;
     }
 
-    public Integer getPreco_unitario() {
+    public BigDecimal getPreco_unitario() {
         return preco_unitario;
     }
 
-    public void setPreco_unitario(Integer preco_unitario) {
+    public void setPreco_unitario(BigDecimal preco_unitario) {
         this.preco_unitario = preco_unitario;
     }
 

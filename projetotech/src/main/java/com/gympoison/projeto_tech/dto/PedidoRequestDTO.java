@@ -5,9 +5,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.springframework.format.annotation.DateTimeFormat;
 
-public record PedidoRequestDTO(@NotNull Double id_pedido, @NotNull Integer id_cliente,
-                                @NotNull Double data_pedido, @NotNull String status_pedido,
-                                @NotNull Double total_pedido, @NotNull Double id_forma_pagamento,
-                                @NotNull String endereco_entrega, @NotNull String observacoes) {}
+public record PedidoRequestDTO(@NotNull Integer id_pedido, @NotNull Integer id_cliente,
+                               @NotNull LocalDateTime data_pedido, @NotNull Enum status_pedido,
+                               @NotNull BigDecimal total_pedido, @NotNull Integer id_forma_pagamento,
+                               @NotNull String endereco_entrega, @NotNull String observacoes) {}
 

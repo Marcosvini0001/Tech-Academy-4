@@ -1,8 +1,10 @@
 package com.gympoison.projeto_tech.model;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -19,10 +21,11 @@ public class Pagamento {
     @Column
     private Integer id_pedido;
 
-    @Column
-    private Date data_pagamento;
+    @Temporal(TemporalType.TIMESTAMP) // Define que o campo será armazenado como data e hora
+    @Column(nullable = false)
+    private LocalDateTime data_pagamento;
 
-    @Column
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal valor_pagamento;
 
     @Column
@@ -31,9 +34,7 @@ public class Pagamento {
     @Column
     private Integer id_forma_pagamento;
     
-    @ManyToOne
-    @JoinColumn(name = "id_item", referencedColumnName = "id_item")
-    private Item item;
+
 
     public String getPagamento() {
         return pagamento;
@@ -41,14 +42,6 @@ public class Pagamento {
 
     public void setPagamento(String pagamento) {
         this.pagamento = pagamento;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
     }
 
     public Integer getId_forma_pagamento() {
@@ -83,11 +76,11 @@ public class Pagamento {
         this.id_pedido = id_pedido;
     }
 
-    public Date getData_pagamento() {
+    public LocalDateTime getData_pagamento() {
         return data_pagamento;
     }
 
-    public void setData_pagamento(Date data_pagamento) {
+    public void setData_pagamento(LocalDateTime data_pagamento) {
         this.data_pagamento = data_pagamento;
     }
 

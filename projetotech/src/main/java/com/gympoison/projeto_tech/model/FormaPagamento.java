@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Table
 @Entity
 public class FormaPagamento {
-
+    @Column(name = "forma_de_pagamento")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_forma_pagamento;

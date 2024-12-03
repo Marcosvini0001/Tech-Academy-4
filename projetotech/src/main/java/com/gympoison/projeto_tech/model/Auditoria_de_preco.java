@@ -2,6 +2,8 @@ package com.gympoison.projeto_tech.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table
 public class Auditoria_de_preco {
@@ -10,48 +12,48 @@ public class Auditoria_de_preco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Double id_auditoria;
+    private Integer id_auditoria;
 
     @Column
-    private Double id_produto;
+    private Integer id_produto;
 
     @Column
-    private Double preco_antigo;
+    private BigDecimal preco_antigo;
 
     @Column
-    private Double preco_novo;
+    private BigDecimal preco_novo;
 
     @Column
-    private Double data_alteracao;
+    private BigDecimal data_alteracao;
 
     @Column
     private String motivo;
 
-    public Double getId_auditoria() {
+    public Integer getId_auditoria() {
         return id_auditoria;
     }
-    public void setId_auditoria(Double id_auditoria) {
+    public void setId_auditoria(Integer id_auditoria) {
         this.id_auditoria = id_auditoria;
     }
 
-    public Double getId_produto(){
+    public Integer getId_produto(){
         return id_produto;
     }
-    public void setId_produto(Double id_produto){
+    public void setId_produto(Integer id_produto){
         this.id_produto = id_produto;
     }
 
-    public Double getpreco_antigo(){
+    public BigDecimal getpreco_antigo(){
         return preco_antigo;
     }
-    public void setpreco_antigo(Double preco_antigo){
+    public void setpreco_antigo(BigDecimal preco_antigo){
         this.preco_antigo = preco_antigo;
     }
 
-    public Double getpreco_novo(){
+    public BigDecimal getpreco_novo(){
         return preco_novo;
     }
-    public void setpreco_novo(Double preco_novo){
+    public void setpreco_novo(BigDecimal preco_novo){
         this.preco_novo = preco_novo;
     }
 
@@ -62,10 +64,10 @@ public class Auditoria_de_preco {
         this.motivo = motivo;
     }
 
-    public Double getdata_alteracao(){
+    public BigDecimal getdata_alteracao(){
         return data_alteracao;
     }
-    public void setdata_alteracao(Double data_alteracao){
+    public void setdata_alteracao(BigDecimal data_alteracao){
         this.data_alteracao = data_alteracao;
     }
 

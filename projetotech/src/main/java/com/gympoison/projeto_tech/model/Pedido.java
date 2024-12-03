@@ -1,7 +1,11 @@
 package com.gympoison.projeto_tech.model;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Table
@@ -9,22 +13,23 @@ import java.util.Objects;
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Double id_pedido;
+    private Integer id_pedido;
 
     @Column
     private Integer id_cliente;
 
-    @Column
-    private Double data_pedido;
+    @Temporal(TemporalType.TIMESTAMP) // Define que o campo será armazenado como data e hora
+    @Column(nullable = false)
+    private LocalDateTime data_pedido;
 
     @Column
-    private String status_pedido;
+    private Enum status_pedido;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal total_pedido;
 
     @Column
-    private Double total_pedido;
-
-    @Column
-    private Double id_forma_pagamento;
+    private Integer id_forma_pagamento;
 
     @Column
     private String endereco_entrega;
@@ -33,17 +38,16 @@ public class Pedido {
     private String observacoes;
 
 
-    public Double getid_pedido() {
+    public Integer getid_pedido() {
 
         return id_pedido;
     }
 
-    public void setid_pedido(Double id_pedido) {
+    public void setid_pedido(Integer id_pedido) {
         this.id_pedido = id_pedido;
     }
 
-    public Integer getcliente() {
-
+    public Integer getid_cliente() {
         return id_cliente;
     }
 
@@ -51,40 +55,40 @@ public class Pedido {
         this.id_cliente = id_cliente;
     }
 
-    public Double getdata_pedido() {
+    public LocalDateTime getdata_pedido() {
 
         return data_pedido;
     }
-    public void setdata_pedido(Double data_pedido) {
+    public void setdata_pedido(LocalDateTime data_pedido) {
 
         this.data_pedido = data_pedido;
     }
 
-    public String getstatus_pedido() {
+    public Enum getstatus_pedido() {
 
         return status_pedido;
     }
 
-    public void setstatus_pedido(String status_pedido) {
+    public void setstatus_pedido(Enum status_pedido) {
 
         this.status_pedido = status_pedido;
     }
 
-    public Double gettotal_pedido() {
+    public BigDecimal gettotal_pedido() {
 
         return total_pedido;
     }
 
-    public void settotal_pedido(Double total_pedido) {
+    public void settotal_pedido(BigDecimal total_pedido) {
 
         this.total_pedido = total_pedido;
     }
 
-    public Double getid_forma_pagamento() {
+    public Integer getid_forma_pagamento() {
         return id_forma_pagamento;
     }
 
-    public void setid_forma_pagamento(Double id_forma_pagamento) {
+    public void setid_forma_pagamento(Integer id_forma_pagamento) {
 
         this.id_forma_pagamento = id_forma_pagamento;
     }
