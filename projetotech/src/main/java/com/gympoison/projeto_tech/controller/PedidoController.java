@@ -33,7 +33,7 @@ public class PedidoController {
 
     }
 
-    @GetMapping("/{id_pedido}")
+    @GetMapping("/id_pedido")
     public ResponseEntity<Pedido> findById(@PathVariable Integer id_pedido) {
         Pedido pedido = repository.findById(id_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
@@ -56,7 +56,7 @@ public class PedidoController {
 
     }
 
-    @DeleteMapping("/{id_pedido}")
+    @DeleteMapping("/id_pedido")
     public ResponseEntity<Void> delete(@PathVariable Integer id_cliente){
         Pedido pedido  = repository.findById(id_cliente)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
@@ -64,7 +64,7 @@ public class PedidoController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id_cliente}")
+    @PutMapping("/id_cliente")
     public ResponseEntity<Pedido> update(@PathVariable Integer id_pedido,@Valid @RequestBody PedidoRequestDTO dto){
         Pedido pedido = repository.findById(id_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));

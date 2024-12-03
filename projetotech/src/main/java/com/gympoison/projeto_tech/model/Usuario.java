@@ -27,6 +27,7 @@ public class Usuario {
     @Column
     private String senha;
 
+    // Getters e Setters
     public Integer getId() {
         return id_usuario;
     }
@@ -48,7 +49,8 @@ public class Usuario {
     }
 
     public void setEndereco(String end_usuario) {
-        this.end_usuario = end_usuario;}
+        this.end_usuario = end_usuario;
+    }
 
     public String getEmail() {
         return email;
@@ -79,9 +81,12 @@ public class Usuario {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return Objects.equals(id_usuario, usuario.id_usuario) && Objects.equals(nm_usuario, usuario.nm_usuario)
-                && Objects.equals(cep_usuario, usuario.cep_usuario) && Objects.equals(email, usuario.email) && Objects.equals(end_usuario,
-                usuario.end_usuario) && Objects.equals(senha, usuario.senha);
+        return Objects.equals(id_usuario, usuario.id_usuario) &&
+                Objects.equals(nm_usuario, usuario.nm_usuario) &&
+                Objects.equals(cep_usuario, usuario.cep_usuario) &&
+                Objects.equals(email, usuario.email) &&
+                Objects.equals(end_usuario, usuario.end_usuario) &&
+                Objects.equals(senha, usuario.senha);
     }
 
     @Override

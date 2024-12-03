@@ -2,41 +2,42 @@ package com.gympoison.projeto_tech.model;
 
 import jakarta.persistence.*;
 
-@Table
 @Entity
+@Table(name = "forma_de_pagamento") // Nome da tabela no banco
 public class FormaPagamento {
-    @Column(name = "forma_de_pagamento")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_forma_pagamento")
     private Integer id_forma_pagamento;
 
-    @Column
+    @Column(name = "tipo_pagamento")
     private String tipo_pagamento;
 
-    @Column
+    @Column(name = "descricao")
     private String Descricao;
 
-    public Integer getid_forma_pagamento() {
+    // Getters e Setters
+    public Integer getIdFormaPagamento() {
         return id_forma_pagamento;
     }
 
-    public void setid_forma_pagamento(Integer id_forma_pagamento) {
-        this.id_forma_pagamento = id_forma_pagamento;
+    public void setIdFormaPagamento(Integer idFormaPagamento) {
+        this.id_forma_pagamento = idFormaPagamento;
     }
 
-    public String getdescricao() {
-        return Descricao;
-    }
-
-    public void setdescricao(String descricao) {
-        Descricao = descricao;
-    }
-
-    public String gettipo_pagamento() {
+    public String getTipoPagamento() {
         return tipo_pagamento;
     }
 
-    public void settipo_pagamento(String tipoPagamento) {
-        this.tipo_pagamento = tipo_pagamento;
+    public void setTipoPagamento(String tipoPagamento) {
+        this.tipo_pagamento = tipoPagamento;
+    }
+
+    public String getDescricao() {
+        return Descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.Descricao = descricao;
     }
 }

@@ -1,19 +1,25 @@
 package com.gympoison.projeto_tech.controller;
 
-import com.gympoison.projeto_tech.model.FormaPagamento;
 import com.gympoison.projeto_tech.model.Auditoria_de_preco;
-import com.gympoison.projeto_tech.repository.FormaPagamentoRepository;
+import com.gympoison.projeto_tech.repository.Auditoria_de_precoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/auditoria_de_preco")
 public class Auditoria_de_precoController {
 
-    private com.gympoison.projeto_tech.repository.FormaPagamentoRepository repository;
-    private List<com.gympoison.projeto_tech.model.Auditoria_de_preco> Auditoria_de_precoRepository;
+    @Autowired
+    private Auditoria_de_precoRepository auditoriaDePrecoRepository;
 
-    public ResponseEntity<List<com.gympoison.projeto_tech.model.Auditoria_de_preco>> findAll() {
-        List<FormaPagamento> Auditoria_de_preco  = this.repository.findAll();
-        return ResponseEntity.ok(Auditoria_de_precoRepository);
+    @GetMapping
+    public ResponseEntity<List<Auditoria_de_preco>> findAll() {
+        List<Auditoria_de_preco> auditoriaDePrecos = this.auditoriaDePrecoRepository.findAll();
+        return ResponseEntity.ok(auditoriaDePrecos);
     }
 }

@@ -5,9 +5,9 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table
+@Table(name = "auditoria_de_preco")
 public class Auditoria_de_preco {
-    @Column(name = "auditoria_de_preco")
+    @Column
     private String auditoria_de_preco;
 
     @Id
