@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
+@Table(name = "pagamento")
 @Entity
 public class Pagamento {
 

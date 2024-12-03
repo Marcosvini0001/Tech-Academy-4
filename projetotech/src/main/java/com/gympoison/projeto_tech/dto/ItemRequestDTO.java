@@ -1,8 +1,10 @@
 package com.gympoison.projeto_tech.dto;
 
 import java.math.BigDecimal;
-import com.gympoison.projeto_tech.model.Item;
+import java.time.LocalDateTime;
 
-public record ItemRequestDTO(String nome_item, BigDecimal preco_atual,
-                             Integer estoque, String descricao, String categoria, Enum status){
+public record ItemRequestDTO(Integer id_item,String nome_item, BigDecimal preco_atual,
+                             Integer estoque, String descricao, String categoria, String status
+                             ,LocalDateTime data_cadastro){
+
 }

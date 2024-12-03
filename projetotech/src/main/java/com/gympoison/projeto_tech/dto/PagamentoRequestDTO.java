@@ -9,7 +9,7 @@ import java.util.Date;
 
 
 public record PagamentoRequestDTO(@NotBlank Integer id_forma_pagamento,
-                                    @NotBlank Enum status_pagamento,
+                                    @NotBlank String status_pagamento,
                                     @NotBlank BigDecimal valor_pagamento,
                                     @NotBlank LocalDateTime data_pagamento,
                                     @NotBlank Integer id_pedido,

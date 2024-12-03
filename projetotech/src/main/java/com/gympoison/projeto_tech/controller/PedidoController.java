@@ -45,7 +45,7 @@ public class PedidoController {
         Usuario usuario = repositoryUsuario.findById(dto.id_cliente())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
         Pedido pedido = new Pedido();
-        pedido.setid_cliente(usuario);
+        pedido.setid_cliente(dto.id_cliente());
         pedido.setid_cliente(dto.id_cliente());
         pedido.setstatus_pedido(dto.Status_pedido());
         pedido.settotal_pedido(dto.total_pedido());
@@ -72,7 +72,7 @@ public class PedidoController {
         Usuario usuario = repositoryUsuario.findById(dto.id_cliente())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
 
-            pedido.setid_cliente(usuario);
+            pedido.setid_cliente(dto.id_cliente());
             pedido.setid_cliente(dto.id_cliente());
             pedido.setstatus_pedido(dto.Status_pedido());
             pedido.settotal_pedido(dto.total_pedido());

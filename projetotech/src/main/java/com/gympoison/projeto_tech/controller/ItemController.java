@@ -1,7 +1,9 @@
 package com.gympoison.projeto_tech.controller;
 
 import com.gympoison.projeto_tech.dto.ItemRequestDTO;
+import com.gympoison.projeto_tech.model.Usuario;
 import com.gympoison.projeto_tech.repository.ItemRepository;
+import com.gympoison.projeto_tech.response.ItemResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,34 +22,45 @@ public class ItemController {
     private ItemRepository repository;
 
     @GetMapping
-    public ResponseEntity<List<Item>> findAll() {
-        List<Item> item = this.repository.findAll();
-        return ResponseEntity.ok(item);
+    public ResponseEntity<List<ItemResponseDTO>> findAll() {
+        List<Item> item = repository.findAll();
+
+        if (item.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        List<ItemResponseDTO> responseDTOList = item.stream()
+                .map(ItemResponseDTO::new)
+                .toList();
+
+        return ResponseEntity.ok(responseDTOList);
     }
 
-    @GetMapping("/id_item_pedido")
-    public ResponseEntity<Item> findById(@PathVariable Integer id_item) {
+    @GetMapping("/{id_item}")
+    public ResponseEntity<ItemResponseDTO> findById(@PathVariable Integer id_item) {
        Item item = this.repository.findById(id_item)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não foi encontrado"));
-        return ResponseEntity.ok(item);
+        return ResponseEntity.ok(new ItemResponseDTO(item));
     }
 
     @PostMapping
-    public ResponseEntity<Item> save(@Valid @RequestBody ItemRequestDTO dto) {
-
+    public ResponseEntity<Item> save(@org.jetbrains.annotations.NotNull @Valid @RequestBody ItemRequestDTO dto) {
         Item item= new Item();
+        item.setId_item(dto.id_item());
         item.setNome_item(dto.nome_item());
         item.setPreco_atual(dto.preco_atual());
+        item.setEstoque(dto.estoque());
         item.setDescricao(dto.descricao());
         item.setCategoria(dto.categoria());
+        item.setData_cadastro(dto.data_cadastro());
         item.setStatus(dto.status());
 
         this.repository.save(item);
-        return ResponseEntity.status(HttpStatus.CREATED).body(item);
+        return ResponseEntity.ok(item);
     }
 
 
-    @DeleteMapping("/id_item_pedido")
+    @DeleteMapping("/{id_item}")
     public ResponseEntity<Void> delete(@PathVariable Integer id_item) {
         Item item = this.repository.findById(id_item)
                 .orElseThrow(() ->
@@ -57,16 +70,13 @@ public class ItemController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/id_item_pedido")
+    @PutMapping("/{id_item}")
     public ResponseEntity<Item> update(@PathVariable Integer id_item, @Valid @RequestBody ItemRequestDTO dto) {
 
         Item item = this.repository.findById(id_item)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não foi encontrado"));
 
-        item.setNome_item(dto.nome_item());
-        item.setPreco_atual(dto.preco_atual());
-        item.setDescricao(dto.descricao());
-        item.setStatus(dto.status());
+        item.setId_item(dto.id_item());
 
         this.repository.save(item);
         return ResponseEntity.ok(item);

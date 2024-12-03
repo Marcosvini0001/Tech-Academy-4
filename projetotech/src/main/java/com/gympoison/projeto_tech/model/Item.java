@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Table
+@Table (name="item")
 @Entity
 public class Item {
     @Id
@@ -29,9 +29,8 @@ public class Item {
     @Column
     private String categoria;
 
-
     @Column
-    private Enum status;
+    private String status;
 
     @Temporal(TemporalType.TIMESTAMP) // Define que o campo será armazenado como data e hora
     @Column(nullable = false)
@@ -53,11 +52,11 @@ public class Item {
         this.data_cadastro = data_cadastro;
     }
 
-    public Enum getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Enum status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -100,6 +99,8 @@ public class Item {
     public void setPreco_atual(BigDecimal preco_atual) {
         this.preco_atual = preco_atual;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

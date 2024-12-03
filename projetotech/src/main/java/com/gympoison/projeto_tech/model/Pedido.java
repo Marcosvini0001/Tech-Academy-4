@@ -2,13 +2,12 @@ package com.gympoison.projeto_tech.model;
 
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
-import com.gympoison.projeto_tech.model.StatusPedido;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Table
+@Table(name = "id_pedido")
 @Entity
 public class Pedido {
     @Id
@@ -23,7 +22,7 @@ public class Pedido {
     private LocalDateTime data_pedido;
 
     @Column
-    private Enum status_pedido;
+    private String status_pedido;
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal total_pedido;
@@ -64,12 +63,12 @@ public class Pedido {
         this.data_pedido = data_pedido;
     }
 
-    public Enum getstatus_pedido() {
+    public String getstatus_pedido() {
 
         return status_pedido;
     }
 
-    public void setstatus_pedido(Enum status_pedido) {
+    public void setstatus_pedido(String status_pedido) {
 
         this.status_pedido = status_pedido;
     }
