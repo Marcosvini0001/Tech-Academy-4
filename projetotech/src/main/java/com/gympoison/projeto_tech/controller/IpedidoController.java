@@ -32,13 +32,13 @@ public class IpedidoController {
   
     @GetMapping
     public ResponseEntity<List<Ipedido>> findAll() {
-        List<Ipedido> itensPedido = ipedidoRepository.findAll();
-        return ResponseEntity.ok(itensPedido);
+        List<Ipedido> itemPedido = ipedidoRepository.findAll();
+        return ResponseEntity.ok(itemPedido);
     }
 
 
     @GetMapping("/{id_item_pedido}")
-    public ResponseEntity<Ipedido> findById(@PathVariable Integer id_item_pedido) {
+    public ResponseEntity<Ipedido> findById(@PathVariable Integer id_item_pedido, @Valid @RequestBody IpedidoRequestDTO dto) {
         Ipedido ipedido = ipedidoRepository.findById(id_item_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item do pedido não encontrado"));
         return ResponseEntity.ok(ipedido);
@@ -46,7 +46,7 @@ public class IpedidoController {
 
 
     @PostMapping
-    public ResponseEntity<Ipedido> create(@Valid @RequestBody IpedidoRequestDTO dto) {
+    public ResponseEntity<Ipedido> create(@PathVariable Integer id_item_pedido, @Valid @RequestBody IpedidoRequestDTO dto) {
         Pedido pedido = pedidoRepository.findById(dto.id_pedido())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
 
@@ -59,6 +59,7 @@ public class IpedidoController {
         ipedido.setQuantidade(dto.quantidade());
         ipedido.setPreco_unitario(dto.preco_unitario());
         ipedido.setTotal_item(dto.total_item());
+        ipedido.setId_item_pedido(dto.id_item_pedido());
 
         ipedidoRepository.save(ipedido);
         return ResponseEntity.status(HttpStatus.CREATED).body(ipedido);
@@ -80,13 +81,13 @@ public class IpedidoController {
         ipedido.setQuantidade(dto.quantidade());
         ipedido.setPreco_unitario(dto.preco_unitario());
         ipedido.setTotal_item(dto.total_item());
-
+        ipedido.setId_item_pedido(dto.id_item_pedido());
         ipedidoRepository.save(ipedido);
         return ResponseEntity.ok(ipedido);
     }
 
     @DeleteMapping("/{id_item_pedido}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id_item_pedido) {
+    public ResponseEntity<Ipedido> delete(@PathVariable Integer id_item_pedido, @Valid @RequestBody IpedidoRequestDTO dto) {
         Ipedido ipedido = ipedidoRepository.findById(id_item_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item do pedido não encontrado"));
 

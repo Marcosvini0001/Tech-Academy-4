@@ -61,10 +61,19 @@ public class ItemController {
 
 
     @DeleteMapping("/{id_item}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id_item) {
+    public ResponseEntity<Item> delete(@PathVariable Integer id_item, @Valid @RequestBody ItemRequestDTO dto) {
         Item item = this.repository.findById(id_item)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não foi encontrado"));
+
+        item.setId_item(dto.id_item());
+        item.setNome_item(dto.nome_item());
+        item.setPreco_atual(dto.preco_atual());
+        item.setEstoque(dto.estoque());
+        item.setDescricao(dto.descricao());
+        item.setCategoria(dto.categoria());
+        item.setData_cadastro(dto.data_cadastro());
+        item.setStatus(dto.status());
 
         this.repository.delete(item);
         return ResponseEntity.noContent().build();
@@ -77,6 +86,13 @@ public class ItemController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não foi encontrado"));
 
         item.setId_item(dto.id_item());
+        item.setNome_item(dto.nome_item());
+        item.setPreco_atual(dto.preco_atual());
+        item.setEstoque(dto.estoque());
+        item.setDescricao(dto.descricao());
+        item.setCategoria(dto.categoria());
+        item.setData_cadastro(dto.data_cadastro());
+        item.setStatus(dto.status());
 
         this.repository.save(item);
         return ResponseEntity.ok(item);

@@ -1,11 +1,10 @@
 package com.gympoison.projeto_tech.model;
 
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import jakarta.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Table(name = "id_pedido")
 @Entity
@@ -37,7 +36,7 @@ public class Pedido {
     private String observacoes;
 
 
-    public Integer getid_pedido() {
+    public Integer getid_pedido(@NotNull Integer integer) {
 
         return id_pedido;
     }
@@ -54,7 +53,7 @@ public class Pedido {
         this.id_cliente = id_cliente;
     }
 
-    public LocalDateTime getdata_pedido() {
+    public LocalDateTime getdata_pedido(@NotNull LocalDateTime localDateTime) {
 
         return data_pedido;
     }
@@ -83,7 +82,7 @@ public class Pedido {
         this.total_pedido = total_pedido;
     }
 
-    public Integer getid_forma_pagamento() {
+    public Integer getid_forma_pagamento(@NotNull Integer integer) {
         return id_forma_pagamento;
     }
 
@@ -92,7 +91,7 @@ public class Pedido {
         this.id_forma_pagamento = id_forma_pagamento;
     }
 
-    public String getendereco_entrega() {
+    public String getendereco_entrega(@NotNull String s) {
 
         return endereco_entrega;
     }
@@ -102,9 +101,9 @@ public class Pedido {
         this.endereco_entrega = endereco_entrega;
     }
 
-    public String getobservacoes() {
+    public String getobservacoes(@NotNull String observacoes) {
 
-        return observacoes;
+        return this.observacoes;
     }
 
     public void setobservacoes(String observacoes) {
