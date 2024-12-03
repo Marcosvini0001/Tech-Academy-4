@@ -2,9 +2,9 @@ package com.gympoison.projeto_tech.dto;
 
 import jakarta.validation.constraints.NotNull;
 
-public record IpedidoRequestDTO(@NotNull Double id_pedido, 
-@NotNull Double id_produto,
-@NotNull Double quantidade,
-@NotNull Double preco_unitario,
-@NotNull Double total_item,
+public record IpedidoRequestDTO(@NotNull Integer id_pedido,
+@NotNull Integer id_produto,
+@NotNull Integer quantidade,
+@NotNull Integer preco_unitario,
+@NotNull Integer total_item,
 @NotNull Integer id_item_pedido){}

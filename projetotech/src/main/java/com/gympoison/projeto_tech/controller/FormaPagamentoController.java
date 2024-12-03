@@ -9,9 +9,9 @@ import java.util.List;
 public class FormaPagamentoController {
 
     private FormaPagamentoRepository repository;
-    private List<com.gympoison.projeto_tech.model.FormaPagamento> FormaPagamentoRepository;
+    private List<FormaPagamento> FormaPagamentoRepository;
 
-    public ResponseEntity<List<com.gympoison.projeto_tech.model.FormaPagamento>> findAll() {
+    public ResponseEntity<List<FormaPagamento>> findAll() {
         List<FormaPagamento> formaPagamento  = this.repository.findAll();
         return ResponseEntity.ok(FormaPagamentoRepository);
     }
