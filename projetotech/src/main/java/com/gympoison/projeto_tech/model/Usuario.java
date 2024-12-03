@@ -25,31 +25,30 @@ public class Usuario {
     private String end_usuario;
 
     @Column
-    private Integer Senha;
+    private Integer senha;
 
     public Integer getId() {
         return id_usuario;
     }
 
-    public void setId(Integer id) {
-        id_usuario = id;
+    public void setId(Integer id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public Integer getSenha() {
-        return Senha;
+        return senha;
     }
 
-    public void setSenha(Integer senha) {
-        Senha = senha;
+    public void setsenha(Integer senha) {
+        this.senha = senha;
     }
 
     public String getEndereco() {
         return end_usuario;
     }
 
-    public void setEndereco(String endereco) {
-        this.end_usuario = endereco;
-    }
+    public void setEndereco(String end_usuario) {
+        this.end_usuario = end_usuario;}
 
     public String getEmail() {
         return email;
@@ -82,11 +81,11 @@ public class Usuario {
         Usuario usuario = (Usuario) o;
         return Objects.equals(id_usuario, usuario.id_usuario) && Objects.equals(nm_usuario, usuario.nm_usuario)
                 && Objects.equals(cep_usuario, usuario.cep_usuario) && Objects.equals(email, usuario.email) && Objects.equals(end_usuario,
-                usuario.end_usuario) && Objects.equals(Senha, usuario.Senha);
+                usuario.end_usuario) && Objects.equals(senha, usuario.senha);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_usuario, nm_usuario, cep_usuario, email, end_usuario, Senha);
+        return Objects.hash(id_usuario, nm_usuario, cep_usuario, email, end_usuario, senha);
     }
 }

@@ -13,7 +13,7 @@ import com.gympoison.projeto_tech.model.Item;
 import java.util.List;
 
 @RestController
-@RequestMapping("/{id_item}")
+@RequestMapping("/id_item")
 public class ItemController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class ItemController {
         return ResponseEntity.ok(item);
     }
 
-    @GetMapping("/{id_item}")
+    @GetMapping("/id_item")
     public ResponseEntity<Item> findById(@PathVariable Integer id_item) {
        Item item = this.repository.findById(id_item)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não foi encontrado"));
@@ -47,7 +47,7 @@ public class ItemController {
     }
 
 
-    @DeleteMapping("/{id_item}")
+    @DeleteMapping("/id_item")
     public ResponseEntity<Void> delete(@PathVariable Integer id_item) {
         Item item = this.repository.findById(id_item)
                 .orElseThrow(() ->
@@ -57,7 +57,7 @@ public class ItemController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id_item}")
+    @PutMapping("/id_item")
     public ResponseEntity<Item> update(@PathVariable Integer id_item, @Valid @RequestBody ItemRequestDTO dto) {
 
         Item item = this.repository.findById(id_item)

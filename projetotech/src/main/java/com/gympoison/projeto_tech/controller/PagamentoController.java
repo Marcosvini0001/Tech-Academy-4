@@ -33,7 +33,7 @@ public class PagamentoController {
 
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/id_pagamento")
     public ResponseEntity <Pagamento> findById(@PathVariable Integer id_pagamento){
         Pagamento pagamento = repository.findById(id_pagamento).orElseThrow(
             
@@ -60,7 +60,7 @@ public class PagamentoController {
 
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/id_item")
     public ResponseEntity <Pagamento> udate(@PathVariable Integer id_pedido,@Valid @RequestBody PagamentoRequestDTO dto) {
         Pedido pedido = pedidoRepository.findById(dto.id_pedido())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
@@ -76,7 +76,7 @@ public class PagamentoController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id_pagamento")
     public ResponseEntity <Pagamento> delete(@PathVariable Integer id_pagamento){
         Pagamento pagamento = repository.findById(id_pagamento).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pagamento não encontrado"));

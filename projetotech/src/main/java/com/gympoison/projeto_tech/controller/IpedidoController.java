@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/{item_pedido}")
+@RequestMapping("/item_pedido")
 public class IpedidoController {
 
     @Autowired
@@ -35,7 +35,7 @@ public class IpedidoController {
         return ResponseEntity.ok(ipedidos);
     }
 
-    @GetMapping("/{item_pedido}")
+    @GetMapping("/item_pedido")
     public ResponseEntity<Ipedido> findById(@PathVariable Integer id_item_pedido) {
         Ipedido ipedido = ipedidoRepository.findById(id_item_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item do pedido não encontrado"));
@@ -61,7 +61,7 @@ public class IpedidoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ipedido);
     }
 
-    @PutMapping("/{item_pedido}")
+    @PutMapping("/item_pedido")
     public ResponseEntity<Ipedido> update(@PathVariable Integer id_item_pedido, @Valid @RequestBody IpedidoRequestDTO dto) {
         Ipedido ipedido = ipedidoRepository.findById(id_item_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item do pedido não encontrado"));
@@ -82,7 +82,7 @@ public class IpedidoController {
         return ResponseEntity.ok(ipedido);
     }
 
-    @DeleteMapping("/{item_pedido}")
+    @DeleteMapping("/item_pedido")
     public ResponseEntity<Void> delete(@PathVariable Integer id_item_pedido) {
         Ipedido ipedido = ipedidoRepository.findById(id_item_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item do pedido não encontrado"));

@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/id_usuario")
 public class UsuarioController {
 
         @Autowired
@@ -32,7 +32,7 @@ public class UsuarioController {
         return ResponseEntity.ok(responseDTO);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id_usuario")
     public ResponseEntity<UsuarioResponseDTO> findById(@PathVariable Integer id_usuario) {
         Usuario usuario = repository.findById(id_usuario).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
@@ -54,7 +54,7 @@ public class UsuarioController {
 
     }
 
-    @DeleteMapping("/{id_usuario}")
+    @DeleteMapping("/id_usuario")
     public ResponseEntity<String> delete(@PathVariable Integer id_usuario) {
         Usuario usuario = repository.findById(id_usuario)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
@@ -63,7 +63,7 @@ public class UsuarioController {
     }
 
 
-    @PutMapping("/{id_usuario}")
+    @PutMapping("/id_usuario")
     public ResponseEntity<Usuario> update(@PathVariable Integer id_usuario,@Valid @RequestBody UsuarioRequestDTO dto){
         Usuario usuario = repository.findById(id_usuario)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));

@@ -9,9 +9,6 @@ import java.util.Objects;
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pedido;
-
-    @Column
     private Double id_pedido;
 
     @Column
@@ -35,15 +32,6 @@ public class Pedido {
     @Column
     private String observacoes;
 
-    public Long getpedido() {
-
-        return pedido;
-    }
-
-    public void setpedido(Long pedido) {
-
-        this.pedido = pedido;
-    }
 
     public Double getid_pedido() {
 
