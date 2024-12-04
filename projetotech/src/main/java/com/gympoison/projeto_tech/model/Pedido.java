@@ -23,7 +23,7 @@ public class Pedido {
     @Column
     private String status_pedido;
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    @Column
     private BigDecimal total_pedido;
 
     @Column
@@ -37,7 +37,6 @@ public class Pedido {
 
 
     public Integer getid_pedido(@NotNull Integer integer) {
-
         return id_pedido;
     }
 
@@ -53,7 +52,7 @@ public class Pedido {
         this.id_cliente = id_cliente;
     }
 
-    public LocalDateTime getdata_pedido(@NotNull LocalDateTime localDateTime) {
+    public LocalDateTime getdata_pedido( LocalDateTime localDateTime) {
 
         return data_pedido;
     }
@@ -82,7 +81,7 @@ public class Pedido {
         this.total_pedido = total_pedido;
     }
 
-    public Integer getid_forma_pagamento(@NotNull Integer integer) {
+    public Integer getid_forma_pagamento( Integer integer) {
         return id_forma_pagamento;
     }
 
@@ -91,7 +90,7 @@ public class Pedido {
         this.id_forma_pagamento = id_forma_pagamento;
     }
 
-    public String getendereco_entrega(@NotNull String s) {
+    public String getendereco_entrega( String s) {
 
         return endereco_entrega;
     }
@@ -101,7 +100,7 @@ public class Pedido {
         this.endereco_entrega = endereco_entrega;
     }
 
-    public String getobservacoes(@NotNull String observacoes) {
+    public String getobservacoes( String observacoes) {
 
         return this.observacoes;
     }
@@ -111,10 +110,6 @@ public class Pedido {
         this.observacoes = observacoes;
     }
 
-    public void setid_cliente(Usuario usuario) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setid_cliente'");
-    }
     
 }
 

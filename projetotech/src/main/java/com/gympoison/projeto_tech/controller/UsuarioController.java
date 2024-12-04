@@ -1,5 +1,6 @@
 package com.gympoison.projeto_tech.controller;
 
+import com.gympoison.projeto_tech.dto.ItemRequestDTO;
 import com.gympoison.projeto_tech.dto.UsuarioRequestDTO;
 import com.gympoison.projeto_tech.model.Usuario;
 import com.gympoison.projeto_tech.repository.UsuarioRepository;
@@ -43,12 +44,12 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> save(@Valid @RequestBody UsuarioRequestDTO dto) {
+    public ResponseEntity<Usuario> save(@org.jetbrains.annotations.NotNull @Valid @RequestBody UsuarioRequestDTO dto) {
         Usuario usuario = new Usuario();
         usuario.setId(dto.id_usuario());
         usuario.setNome(dto.nm_usuario());
-        usuario.setEmail(dto.email());
         usuario.setCep(dto.cep_usuario());
+        usuario.setEmail(dto.email());
         usuario.setSenha(dto.senha());
         usuario.setEndereco(dto.end_usuario());
 
@@ -57,9 +58,15 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id_usuario}")
-    public ResponseEntity<String> delete(@PathVariable Integer id_usuario) {
+    public ResponseEntity<String> delete(@PathVariable Integer id_usuario, @Valid @RequestBody UsuarioRequestDTO dto) {
         Usuario usuario = repository.findById(id_usuario)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
+        usuario.setId(dto.id_usuario());
+        usuario.setNome(dto.nm_usuario());
+        usuario.setCep(dto.cep_usuario());
+        usuario.setEmail(dto.email());
+        usuario.setSenha(dto.senha());
+        usuario.setEndereco(dto.end_usuario());
         repository.delete(usuario);
         return ResponseEntity.ok("Usuário removido com sucesso");
     }
@@ -71,8 +78,8 @@ public class UsuarioController {
 
         usuario.setId(dto.id_usuario());
         usuario.setNome(dto.nm_usuario());
-        usuario.setEmail(dto.email());
         usuario.setCep(dto.cep_usuario());
+        usuario.setEmail(dto.email());
         usuario.setSenha(dto.senha());
         usuario.setEndereco(dto.end_usuario());
 

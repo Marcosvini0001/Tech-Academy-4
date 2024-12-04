@@ -33,7 +33,7 @@ public class PedidoController {
 
     }
 
-    @GetMapping("/id_pedido")
+    @GetMapping("/{id_pedido}")
     public ResponseEntity<Pedido> findById(@PathVariable Integer id_pedido) {
         Pedido pedido = repository.findById(id_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
@@ -41,7 +41,7 @@ public class PedidoController {
     }
 
     @PostMapping
-    public ResponseEntity<Pedido> save(@PathVariable Integer id_pedido,@Valid @RequestBody PedidoRequestDTO dto) {
+    public ResponseEntity<Pedido> save(@org.jetbrains.annotations.NotNull @Valid @RequestBody PedidoRequestDTO dto) {
 
         Pedido pedido = new Pedido();
         pedido.getid_pedido(dto.id_pedido());
@@ -54,13 +54,13 @@ public class PedidoController {
         pedido.getobservacoes(dto.observacoes());
 
 
-        this.repository.save(pedido);
-        return ResponseEntity.status(HttpStatus.CREATED).body(pedido);
+        repository.save(pedido);
+        return ResponseEntity.noContent().build();
 
     }
 
-    @DeleteMapping("/id_pedido")
-    public ResponseEntity<Void> delete(@PathVariable Integer id_pedido,@Valid @RequestBody PedidoRequestDTO dto){
+    @DeleteMapping("/{id_pedido}")
+    public ResponseEntity<Pedido> delete(@PathVariable Integer id_pedido,@Valid @RequestBody PedidoRequestDTO dto){
         Pedido pedido  = repository.findById(id_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
 
@@ -77,7 +77,7 @@ public class PedidoController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/id_pedido")
+    @PutMapping("/{id_pedido}")
     public ResponseEntity<Pedido> update(@PathVariable Integer id_pedido,@Valid @RequestBody PedidoRequestDTO dto){
         Pedido pedido = repository.findById(id_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
@@ -92,7 +92,7 @@ public class PedidoController {
         pedido.getobservacoes(dto.observacoes());
 
         repository.save(pedido);
-        return ResponseEntity.ok(pedido);
+        return ResponseEntity.noContent().build();
     }
 
 }

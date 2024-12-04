@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public record PedidoRequestDTO(@NotNull Integer id_pedido, @NotNull Integer id_cliente,
                                @NotNull LocalDateTime data_pedido, @NotNull String Status_pedido,
                                @NotNull BigDecimal total_pedido, @NotNull Integer id_forma_pagamento,
-                               @NotNull String endereco_entrega, @NotNull String observacoes) {
+                               @NotNull String endereco_entrega, String observacoes) {
 }
 
 

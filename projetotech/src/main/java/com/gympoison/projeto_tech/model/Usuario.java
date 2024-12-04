@@ -76,21 +76,5 @@ public class Usuario {
         this.nm_usuario = nome;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Usuario usuario = (Usuario) o;
-        return Objects.equals(id_usuario, usuario.id_usuario) &&
-                Objects.equals(nm_usuario, usuario.nm_usuario) &&
-                Objects.equals(cep_usuario, usuario.cep_usuario) &&
-                Objects.equals(email, usuario.email) &&
-                Objects.equals(end_usuario, usuario.end_usuario) &&
-                Objects.equals(senha, usuario.senha);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id_usuario, nm_usuario, cep_usuario, email, end_usuario, senha);
-    }
 }
