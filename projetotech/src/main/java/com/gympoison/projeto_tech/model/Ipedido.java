@@ -19,6 +19,7 @@ public class Ipedido {
     @JoinColumn(name = "id_produto", nullable = false) // Use a coluna correta para o relacionamento com Produto
     private Item item;
 
+
     @Column(nullable = false)
     private Integer quantidade;
 

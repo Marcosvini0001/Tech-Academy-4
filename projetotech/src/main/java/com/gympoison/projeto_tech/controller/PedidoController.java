@@ -1,11 +1,12 @@
 package com.gympoison.projeto_tech.controller;
 
-
 import com.gympoison.projeto_tech.dto.PedidoRequestDTO;
 import com.gympoison.projeto_tech.model.Pedido;
 import com.gympoison.projeto_tech.model.Usuario;
 import com.gympoison.projeto_tech.repository.UsuarioRepository;
+import com.gympoison.projeto_tech.response.PedidoResponseDTO;
 import com.gympoison.projeto_tech.repository.PedidoRepository;
+import com.gympoison.projeto_tech.response.UsuarioResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,83 +17,97 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/id_pedido")
+@RequestMapping("/pedido")
 public class PedidoController {
 
     @Autowired
-    private PedidoRepository repository;
+    private PedidoRepository pedidoRepository;
 
     @Autowired
-    private UsuarioRepository repositoryUsuario;
+    private UsuarioRepository usuarioRepository; // Repositório para buscar clientes (relacionamento)
 
-
+    // Busca todos os pedidos
     @GetMapping
-    public ResponseEntity<List<Pedido>> findAll() {
-        List<Pedido> pedido = repository.findAll();
-        return ResponseEntity.ok(pedido);
+    public ResponseEntity<List<PedidoResponseDTO>> findAll() {
+        List<Pedido> pedidos = pedidoRepository.findAll();
+        if (pedidos.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
 
+        List<PedidoResponseDTO> responseDTOList = pedidos.stream()
+                .map(PedidoResponseDTO::new)
+                .toList();
+        return ResponseEntity.ok(responseDTOList);
     }
+
 
     @GetMapping("/{id_pedido}")
-    public ResponseEntity<Pedido> findById(@PathVariable Integer id_pedido) {
-        Pedido pedido = repository.findById(id_pedido)
+    public ResponseEntity<PedidoResponseDTO> findById(@PathVariable Integer id_pedido) {
+        Pedido pedido = pedidoRepository.findById(id_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
+
+        return ResponseEntity.ok(new PedidoResponseDTO(pedido));
+    }
+
+
+    @PostMapping
+    public ResponseEntity<Pedido> save(@Valid @RequestBody PedidoRequestDTO dto) {
+        Usuario cliente = usuarioRepository.findById(dto.id_cliente())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
+
+        Pedido pedido = new Pedido();
+        pedido.setId_pedido(dto.id_pedido());
+        pedido.setCliente(cliente);
+        pedido.setData_pedido(dto.data_pedido());
+        pedido.setStatus_pedido(dto.Status_pedido());
+        pedido.setTotal_pedido(dto.total_pedido());
+        pedido.setId_forma_pagamento(dto.id_forma_pagamento());
+        pedido.setEndereco_entrega(dto.endereco_entrega());
+        pedido.setObservacoes(dto.observacoes());
+
+        this.pedidoRepository.save(pedido);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pedido);
+    }
+
+    // Atualiza um pedido existente
+    @PutMapping("/{id_pedido}")
+    public ResponseEntity<Pedido> update(@PathVariable Integer id_pedido, @Valid @RequestBody PedidoRequestDTO dto) {
+        Pedido pedido = pedidoRepository.findById(id_pedido)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
+
+        Usuario cliente = usuarioRepository.findById(dto.id_cliente())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
+
+        pedido.setCliente(cliente); // Atualiza o cliente relacionado
+        pedido.setData_pedido(dto.data_pedido());
+        pedido.setStatus_pedido(dto.Status_pedido());
+        pedido.setTotal_pedido(dto.total_pedido());
+        pedido.setId_forma_pagamento(dto.id_forma_pagamento());
+        pedido.setEndereco_entrega(dto.endereco_entrega());
+        pedido.setObservacoes(dto.observacoes());
+
+        pedidoRepository.save(pedido);
         return ResponseEntity.ok(pedido);
     }
 
-    @PostMapping
-    public ResponseEntity<Pedido> save(@org.jetbrains.annotations.NotNull @Valid @RequestBody PedidoRequestDTO dto) {
-
-        Pedido pedido = new Pedido();
-        pedido.getid_pedido(dto.id_pedido());
-        pedido.setid_cliente(dto.id_cliente());
-        pedido.setstatus_pedido(dto.Status_pedido());
-        pedido.settotal_pedido(dto.total_pedido());
-        pedido.getdata_pedido(dto.data_pedido());
-        pedido.getid_forma_pagamento(dto.id_forma_pagamento());
-        pedido.getendereco_entrega(dto.endereco_entrega());
-        pedido.getobservacoes(dto.observacoes());
-
-
-        repository.save(pedido);
-        return ResponseEntity.noContent().build();
-
-    }
-
+    // Deleta um pedido pelo ID
     @DeleteMapping("/{id_pedido}")
-    public ResponseEntity<Pedido> delete(@PathVariable Integer id_pedido,@Valid @RequestBody PedidoRequestDTO dto){
-        Pedido pedido  = repository.findById(id_pedido)
+    public ResponseEntity<Void> delete(@PathVariable Integer id_pedido, @Valid @RequestBody PedidoRequestDTO dto) {
+        Pedido pedido = pedidoRepository.findById(id_pedido)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
+        Usuario cliente = usuarioRepository.findById(dto.id_cliente())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
 
-        pedido.getid_pedido(dto.id_pedido());
-        pedido.setid_cliente(dto.id_cliente());
-        pedido.setstatus_pedido(dto.Status_pedido());
-        pedido.settotal_pedido(dto.total_pedido());
-        pedido.getdata_pedido(dto.data_pedido());
-        pedido.getid_forma_pagamento(dto.id_forma_pagamento());
-        pedido.getendereco_entrega(dto.endereco_entrega());
-        pedido.getobservacoes(dto.observacoes());
+        pedido.setCliente(cliente); // Atualiza o cliente relacionado
+        pedido.setData_pedido(dto.data_pedido());
+        pedido.setStatus_pedido(dto.Status_pedido());
+        pedido.setTotal_pedido(dto.total_pedido());
+        pedido.setId_forma_pagamento(dto.id_forma_pagamento());
+        pedido.setEndereco_entrega(dto.endereco_entrega());
+        pedido.setObservacoes(dto.observacoes());
 
-        repository.delete(pedido);
+        pedidoRepository.delete(pedido);
         return ResponseEntity.noContent().build();
     }
-
-    @PutMapping("/{id_pedido}")
-    public ResponseEntity<Pedido> update(@PathVariable Integer id_pedido,@Valid @RequestBody PedidoRequestDTO dto){
-        Pedido pedido = repository.findById(id_pedido)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
-
-        pedido.getid_pedido(dto.id_pedido());
-        pedido.setid_cliente(dto.id_cliente());
-        pedido.setstatus_pedido(dto.Status_pedido());
-        pedido.settotal_pedido(dto.total_pedido());
-        pedido.getdata_pedido(dto.data_pedido());
-        pedido.getid_forma_pagamento(dto.id_forma_pagamento());
-        pedido.getendereco_entrega(dto.endereco_entrega());
-        pedido.getobservacoes(dto.observacoes());
-
-        repository.save(pedido);
-        return ResponseEntity.noContent().build();
-    }
-
 }
+
