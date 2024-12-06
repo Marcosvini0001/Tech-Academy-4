@@ -22,7 +22,7 @@ public class Pagamento {
 
     @ManyToOne
     @JoinColumn(name = "id_pedido", nullable = false)
-    private Pedido pedido; // Relacionamento com Pedido
+    private Pedido pedido;
 
     public Integer getId_pagamento() {
         return id_pagamento;

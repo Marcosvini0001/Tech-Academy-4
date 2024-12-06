@@ -3,7 +3,7 @@ package com.gympoison.projeto_tech.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "forma_de_pagamento") // Nome da tabela no banco
+@Table(name = "forma_de_pagamento")
 public class FormaPagamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

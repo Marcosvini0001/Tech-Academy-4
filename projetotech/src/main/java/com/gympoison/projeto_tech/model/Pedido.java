@@ -13,7 +13,7 @@ public class Pedido {
     private Integer id_pedido;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente", nullable = false) // Relacionamento com a tabela de usuários
+    @JoinColumn(name = "id_cliente", nullable = false)
     private Usuario cliente;
 
     @Column(nullable = false)
@@ -34,7 +34,7 @@ public class Pedido {
     @Column
     private String observacoes;
 
-    // Getters e Setters
+
     public Integer getId_pedido() {
         return id_pedido;
     }

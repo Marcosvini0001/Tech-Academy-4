@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pagamentos") // Ajuste a URL base
+@RequestMapping("/pagamentos")
 public class PagamentoController {
 
     @Autowired

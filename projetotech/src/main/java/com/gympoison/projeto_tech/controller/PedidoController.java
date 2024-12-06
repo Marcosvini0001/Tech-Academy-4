@@ -24,9 +24,9 @@ public class PedidoController {
     private PedidoRepository pedidoRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository; // Repositório para buscar clientes (relacionamento)
+    private UsuarioRepository usuarioRepository;
 
-    // Busca todos os pedidos
+
     @GetMapping
     public ResponseEntity<List<PedidoResponseDTO>> findAll() {
         List<Pedido> pedidos = pedidoRepository.findAll();
@@ -69,7 +69,7 @@ public class PedidoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(pedido);
     }
 
-    // Atualiza um pedido existente
+
     @PutMapping("/{id_pedido}")
     public ResponseEntity<Pedido> update(@PathVariable Integer id_pedido, @Valid @RequestBody PedidoRequestDTO dto) {
         Pedido pedido = pedidoRepository.findById(id_pedido)
@@ -78,7 +78,7 @@ public class PedidoController {
         Usuario cliente = usuarioRepository.findById(dto.id_cliente())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
 
-        pedido.setCliente(cliente); // Atualiza o cliente relacionado
+        pedido.setCliente(cliente);
         pedido.setData_pedido(dto.data_pedido());
         pedido.setStatus_pedido(dto.Status_pedido());
         pedido.setTotal_pedido(dto.total_pedido());
@@ -90,7 +90,7 @@ public class PedidoController {
         return ResponseEntity.ok(pedido);
     }
 
-    // Deleta um pedido pelo ID
+
     @DeleteMapping("/{id_pedido}")
     public ResponseEntity<Void> delete(@PathVariable Integer id_pedido, @Valid @RequestBody PedidoRequestDTO dto) {
         Pedido pedido = pedidoRepository.findById(id_pedido)
@@ -98,7 +98,7 @@ public class PedidoController {
         Usuario cliente = usuarioRepository.findById(dto.id_cliente())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
 
-        pedido.setCliente(cliente); // Atualiza o cliente relacionado
+        pedido.setCliente(cliente);
         pedido.setData_pedido(dto.data_pedido());
         pedido.setStatus_pedido(dto.Status_pedido());
         pedido.setTotal_pedido(dto.total_pedido());

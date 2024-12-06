@@ -9,14 +9,14 @@ public class Ipedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_item_pedido; // Essa é a chave primária
+    private Integer id_item_pedido;
 
     @ManyToOne
-    @JoinColumn(name = "id_pedido", nullable = false) // Use a coluna correta para o relacionamento com Pedido
+    @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn(name = "id_produto", nullable = false) // Use a coluna correta para o relacionamento com Produto
+    @JoinColumn(name = "id_produto", nullable = false)
     private Item item;
 
 
@@ -28,8 +28,6 @@ public class Ipedido {
 
     @Column(nullable = false)
     private BigDecimal total_item;
-
-    // Getters e setters
 
     public Integer getId_item_pedido() {
         return id_item_pedido;

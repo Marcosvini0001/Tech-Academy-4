@@ -32,7 +32,7 @@ public class Item {
     @Column
     private String status;
 
-    @Temporal(TemporalType.TIMESTAMP) // Define que o campo será armazenado como data e hora
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private LocalDateTime data_cadastro;
 
